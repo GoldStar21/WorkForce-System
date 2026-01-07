@@ -1,0 +1,135 @@
+.sidebar {
+  background: #e8f1f5;
+  //min-width: 10%;
+  //max-width: 20%;
+  width: 200px;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  box-shadow: -4px 0 10px rgba(0, 0, 0, 0.8);
+
+    transition: width 0.4s ease, background-color 0.5s, color 0.2s;
+
+  &__openClose {
+    display: none;
+  }
+
+  &__menu {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 20px 10px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 15px 28px;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.2s;
+
+    &:hover {
+      background-color: #1383ba;
+    }
+  }
+
+  &__icon {
+    font-size: 24px;
+    color: #333;
+  }
+
+  &__text {
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  &__logout {
+    padding: 20px 28px;
+  }
+
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+    
+    width: 180px;
+    
+
+    &--collapsed {
+      width: 60px;
+    }
+
+    &__openClose {
+      display: flex;
+      align-items: center;
+    }
+
+    &__arrows {
+      padding: 15px 8px;
+      font-size: 23px;
+      color: #333;
+    }
+
+    &__menu {
+      padding: 20px 0;
+    }
+
+    &__item {
+      padding: 15px 8px;
+    }
+
+    &__icon {
+      font-size: 23px;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+
+    &__logout {
+      padding: 20px 8px;
+    }
+  }
+  //Visak je ovo
+
+  @include respondBetween(0, $breakpoint-mobile) {
+    width: 180px;
+
+    &--collapsed {
+      width: 35px;
+    }
+
+    &__openClose {
+      display: flex;
+      align-items: center;
+    }
+
+    &__arrows {
+      padding: 15px 8px;
+      font-size: 23px;
+      color: #333;
+    }
+
+    &__menu {
+      padding: 20px 0;
+    }
+
+    &__item {
+      padding: 15px 8px;
+    }
+
+    &__icon {
+      font-size: 23px;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+
+    &__logout {
+      padding: 20px 8px;
+    }
+  }
+}

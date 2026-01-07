@@ -1,0 +1,71 @@
+.login {
+  height: 100vh;
+  @include flex-center;
+  background-color: #fafafa; // DAT BOJI IME
+
+  &__card {
+    background-color: white;
+    padding: 1.3rem 1rem;
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    border: 1px solid #ccc;
+  }
+
+  &__title {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #333333;
+  }
+
+  &__forgottenPasswordLink {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 1.2rem;
+  }
+
+  &__forgottenPasswordText {
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+      color: #65a0db;
+      transition: color 0.2s ease;
+    }
+  }
+
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+    &__title {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    &__forgottenPasswordLink {
+      margin-top: 1.2rem;
+    }
+  }
+
+  @include respondBetween(0, $breakpoint-mobile) {
+    &__card {
+      width: 80%;
+      max-width: 300px;
+    }
+
+    &__title {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    &__forgottenPasswordLink {
+      margin-top: 1rem;
+    }
+
+    &__forgottenPasswordText {
+      font-size: 11px;
+    }
+  }
+}

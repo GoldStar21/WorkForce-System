@@ -1,0 +1,10 @@
+.siteLayout {
+    //@include c-container;
+    display: flex;
+    height: calc(100vh - 100px);
+    width: 100%;
+
+    @include respondBetween(0, $breakpoint-mobile) {
+   }
+    
+}

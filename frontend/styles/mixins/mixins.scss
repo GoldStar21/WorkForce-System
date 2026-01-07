@@ -1,0 +1,38 @@
+@mixin respondBetween($min: null, $max: null) {
+  @if $min != null and $max != null {
+    @media screen and (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $min != null {
+    @media screen and (min-width: $min) {
+      @content;
+    }
+  } @else if $max != null {
+    @media screen and (max-width: $max) {
+      @content;
+    }
+  } @else {
+    @warn "respondBetween mixin requires at least one parameter: $min or $max.";
+  }
+}
+
+// Mixin je ponovno upotrebljiv blok SCSS koda (npr. za stilove, media querije, efekte, boje itd.) koji možeš ubaciti u bilo koji drugi SCSS fajl pomoću @include.
+
+//Umjesto da stalno ponavljaš isti CSS kod, u mixin fajlu definiraš te stvari jednom.
+
+// Nopraviti da radi treba use ili nesto. Procitati Sass dokumentaciju
+@mixin flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin c-container {
+  box-sizing: border-box;
+  margin: auto;
+  padding: 0 40px;
+  max-width: 2200px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}

@@ -1,0 +1,34 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  &__group {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.7rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &:focus {
+      border-color: #004a7c;
+    }
+  }
+
+  &__icons {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1.2rem;
+    pointer-events: none;
+  }
+}

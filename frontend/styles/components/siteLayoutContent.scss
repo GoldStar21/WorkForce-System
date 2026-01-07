@@ -1,0 +1,20 @@
+.siteLayoutContent {
+  background-color: #FAFAFA;
+  width: calc(100% - 200px);
+  height: 100%;
+  padding: 0 20px;
+  box-sizing: border-box;
+
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+   width: 100%;
+  
+    background-color: #FAFAFA;
+   }
+
+   @include respondBetween(0, $breakpoint-mobile) {
+   width: 100%;
+   padding: 0 0;
+  
+    background-color: #FAFAFA;
+   }
+}

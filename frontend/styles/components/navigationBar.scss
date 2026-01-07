@@ -1,0 +1,107 @@
+.header {
+  background-color: #005691;
+  color: #fafafa;
+  height: 60px;
+  display: flex;
+  align-items: center;
+
+  &__content {
+    @include c-container;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__leftSide {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__logo {
+    font-size: 2.5rem;
+    color: #fafafa;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    color: #fafafa;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+  }
+
+  &__rightSide {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__username {
+    color: #fafafa;
+    font-size: 1.2rem;
+  }
+
+  &__hamburgerIcon {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+
+  &__mobileSideMenu {
+    position: fixed;
+    top: 60px;
+    right: -80px;
+    width: 80px;
+    height: calc(100vh - 60px - 40px);
+    background: #fff;
+    transition: right 0.5s ease;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0;
+    gap: 3rem;
+    z-index: 999;
+    box-sizing: border-box;
+    box-shadow: none;
+    align-items: center;
+
+    &--open {
+      right: 0;
+      box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  @include respondBetween(0, $breakpoint-mobile) {
+    &__leftSide {
+      gap: 0.8rem;
+    }
+
+    &__logo {
+      font-size: 2.4rem;
+    }
+
+    &__icon {
+      font-size: 1.7rem;
+      color: #232323;
+    }
+
+    &__title {
+      font-size: 0.9rem;
+    }
+
+    &__rightSide {
+      display: none;
+    }
+
+    &__username {
+      color: #0a0a0a;
+      font-size: 1.2rem;
+    }
+
+    &__hamburgerIcon {
+      display: block;
+    }
+  }
+}

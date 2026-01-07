@@ -1,0 +1,132 @@
+.dashboardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 0;
+  
+  height: calc(100% - 40px);
+  // raste da popuni prostor
+  //gap: 0.2rem;
+
+
+  &__select {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+  }
+
+  
+
+  &__dropdown {
+    width: 100px;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    background-color: #fff;
+
+    cursor: pointer;
+
+    /*&:hover {
+      border-color: #777;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #333;
+    }
+    option[disabled] {
+      color: #888;
+    }
+      */
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //background-color: #d9d9d9;
+    //box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.3);
+    //border: 1px solid #ccc;
+    //border-radius: 10px;
+    min-width: 150px;
+    max-width: 400px;
+
+    //&:hover {
+      //background-color: #e8f1f5;
+    //}
+  }
+
+  &__title {
+    font-size: 1rem;
+    margin: 0;
+    margin-top: 10px;
+  }
+
+  &__number {
+    font-size: 3rem;
+    margin: 15px 0;
+  }
+
+  @include respondBetween(0, $breakpoint-mobile) {
+
+    
+    
+
+    &__map {
+      padding: 0 10px;
+    }
+     &__dropdown {
+    width: 130px;
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+
+    border: none;
+    border-radius: 2px;
+    background-color: #fff;
+
+    cursor: pointer;
+
+    &:hover {
+      border-color: inherit;
+    }
+
+    &:focus {
+       outline: none;
+      border-color: #333;
+    }
+    option[disabled] {
+      color: #888;
+    }
+  }
+
+   
+
+  
+  &__info {
+    display: none;
+
+    
+  }
+
+  &__title {
+    font-size: 0.7rem;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  &__number {
+    font-size: 1.2rem;
+    margin: 0 0;
+  }
+  }
+}
