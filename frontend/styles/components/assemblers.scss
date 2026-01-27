@@ -9,201 +9,250 @@
   &__form {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    border: 1px solid #333;
-    padding: 1.5rem 2rem;
+    gap: 1.75rem;
+
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
     max-height: 600px;
+    max-width: 420px;
   }
 
   &__container {
     display: flex;
     flex-direction: column;
+    gap: 0.4rem;
   }
 
   &__formTitle {
-    font-size: 1rem;
+    font-size: 1.1rem;
     letter-spacing: 0.3px;
+    font-weight: 700;
     text-align: center;
+    color: #111827;
     margin-bottom: 1.5rem;
   }
 
   &__label {
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
-    color: #333;
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.3px;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
   }
 
   &__input {
-    padding: 0.7rem 1rem;
-    border: 1px solid #d0d0d0;
-    border-radius: 0.6rem;
-    background: #fff;
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+    font-size: 0.95rem;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
     &:focus {
-      border-color: #4f7df3;
+      border-color: #2563eb;
       outline: none;
-      box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.2);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     }
   }
 
-  &__checkboxLabel {
-    font-size: 1rem;
+  &__checkboxLabel,
+  &__radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: 0.95rem;
     font-weight: 500;
-    color: #333;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.3px;
+    color: #374151;
+
+    cursor: pointer;
   }
 
-  &__radioLabel {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.3px;
+  &__checkboxLabel input,
+  &__radioLabel input {
+    accent-color: #2563eb;
+    cursor: pointer;
+  }
+
+  /* Optional UX polish */
+  &__container:hover &__input {
+    border-color: #9ca3af;
   }
 
   &__wrapper {
     width: 100%;
-    height: 100%;
-    overflow: auto;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
   }
 
   &__table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    min-width: 900px; // sprječava lomljenje kolona
   }
 
   &__thead {
-    background-color: #f5f5f5;
+    background-color: #f3f4f6;
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
   }
 
-  &__th,
-  &__td {
-    padding: 0.2rem;
+  &__th {
+    padding: 0.75rem 0.5rem;
     text-align: center;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    white-space: nowrap;
+  }
+
+  &__td {
+    padding: 0.6rem 0.5rem;
+    text-align: center;
+    color: #444;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    letter-spacing: 0.6px;
+
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   &__tr {
-    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f9fafb;
+    }
+  }
+
+  /* Zebra effect (čitljivost) */
+  &__tbody &__tr:nth-child(even) {
+    background-color: #fcfcfc;
   }
 
   &__buttons {
+    //display: flex;
+    //justify-content: center;
+    //gap: 0.5rem;
+    //white-space: nowrap;
+
+    padding: 0.2rem 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background-color: inherit;
+
     display: flex;
     justify-content: center;
     gap: 0.5rem;
   }
 
-  @include respondBetween ($breakpoint-mobile, $breakpoint-tablet) {
-
-  //display: flex;
-  //justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 1.5rem 0;
-  gap: 1.5rem;
-  //height: calc(100% - 3rem);
-  overflow: hidden;
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+    //display: flex;
+    //justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem 0;
+    gap: 1.5rem;
+    //height: calc(100% - 3rem);
+    overflow: hidden;
 
     &__form {
-    //display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.1rem;
-    //border: 1px solid #333;
-    padding: 0.2rem;
-    //max-height: auto;
-    width: 100%;
-  }
-
-
-  &__formTitle {
-    display: none;
-  }
-
-  &__label {
-    font-size: 0.6rem;
-    font-weight: 600;
-    color: #333;
-    //margin-bottom: 0.4rem;
-    letter-spacing: 0.3px;
-  }
-
-  &__input {
-    padding: 0.5rem 0.7rem;
-    border: 1px solid #d0d0d0;
-    border-radius: 0.6rem;
-    background: #fff;
-    font-size: 0.6rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
-
-    &:focus {
-      border-color: #4f7df3;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.2);
+      //display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.1rem;
+      //border: 1px solid #333;
+      padding: 0.2rem;
+      //max-height: auto;
+      width: 100%;
     }
-  }
 
-  &__checkboxLabel {
-    font-size: 0.6rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.3px;
-  }
+    &__formTitle {
+      display: none;
+    }
 
-  &__radioLabel {
-    font-size: 0.6rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.3px;
-  }
+    &__label {
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: #333;
+      //margin-bottom: 0.4rem;
+      letter-spacing: 0.3px;
+    }
 
-  &__wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-  }
+    &__input {
+      padding: 0.5rem 0.7rem;
+      border: 1px solid #d0d0d0;
+      border-radius: 0.6rem;
+      background: #fff;
+      font-size: 0.6rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
 
-  &__table {
-    //width: 100%;
-    //border-collapse: collapse;
-    font-size: 0.6rem;
-  }
+      &:focus {
+        border-color: #4f7df3;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.2);
+      }
+    }
 
-  &__thead {
-    background-color: #f5f5f5;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-  }
+    &__checkboxLabel {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.3px;
+    }
 
-  &__th,
-  &__td {
-    padding: 0.2rem;
-    text-align: center;
-    border-left: 1px solid #ddd;
-    border-right: 1px solid #ddd;
-  }
+    &__radioLabel {
+      font-size: 0.6rem;
+      font-weight: 500;
+      color: #333;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.3px;
+    }
 
-  &__tr {
-    border-bottom: 1px solid #ddd;
-  }
+    &__wrapper {
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
 
-  
+    &__table {
+      //width: 100%;
+      //border-collapse: collapse;
+      font-size: 0.6rem;
+    }
+
+    &__thead {
+      background-color: #f5f5f5;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    &__th,
+    &__td {
+      padding: 0.2rem;
+      text-align: center;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    &__tr {
+      border-bottom: 1px solid #ddd;
+    }
   }
 }

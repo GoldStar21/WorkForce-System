@@ -11,7 +11,10 @@
   box-sizing: border-box;
   box-shadow: -4px 0 10px rgba(0, 0, 0, 0.8);
 
-    transition: width 0.4s ease, background-color 0.5s, color 0.2s;
+  transition:
+    width 0.4s ease,
+    background-color 0.5s,
+    color 0.2s;
 
   &__openClose {
     display: none;
@@ -24,7 +27,8 @@
     padding: 20px 10px;
   }
 
-  &__item {
+  /*
+  &__item, &__home {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -34,6 +38,37 @@
 
     &:hover {
       background-color: #1383ba;
+      
+    }
+  }
+    */
+
+  &__item,
+  &__home {
+    position: relative; // ⬅ potrebno za ::after
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 15px 28px;
+    cursor: pointer;
+    transition:
+      background-color 0.5s,
+      color 0.2s;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 6px; // udaljenost linije od dna
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: #1383ba;
+      transform: translateX(-50%);
+      transition: width 0.2s ease;
+    }
+
+    &:hover::after {
+      width: 80%; // koliko se linija raširi
     }
   }
 
@@ -53,9 +88,7 @@
   }
 
   @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
-    
     width: 180px;
-    
 
     &--collapsed {
       width: 60px;

@@ -14,25 +14,7 @@
   background-color: #005691;
   color: #ffffff;
 
-  &--actions {
-    
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-
-    text-align: center;
-    transition: background-color 0.6s ease;
-    font-size: 17px;
-    font-weight: 500;
-
-    &:hover {
-      background-color: #a1230d;
-      color: white;
-    }
-  }
-
   &--login {
-    
     padding: 0.5rem 1rem;
     border-radius: 8px;
     border: 1px solid #ccc;
@@ -50,19 +32,98 @@
     background-color: #0a9e4d;
   }
 
-  &--edit {
-    padding: 0.5rem 1rem;
+  &--save {
+    padding: 0.5rem 0.5rem;
     border-radius: 8px;
     border: 1px solid #ccc;
+
+    text-align: center;
+    //transition: background-color 0.6s ease;
+    font-size: 17px;
+    font-weight: 500;
+
+    background-color: #0a9e4d;
+
+    &:hover {
+      background-color: #05ce5f;
+      
+    }
+  }
+
+  &--delete {
+    padding: 0.5rem 0.7rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+
+    text-align: center;
+    transition: background-color 0.6s ease;
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover {
+      background-color: darkred;
+      color: white;
+      border: 1px solid #ccc;
+    }
+
+    background-color: white;
+    color: black;
+  }
+
+  &--edit {
+    padding: 0.5rem 0.7rem;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+
+    text-align: center;
+    transition: background-color 0.6s ease;
+    font-size: 14px;
+    font-weight: 500;
+
+    &:hover {
+      background-color: rgb(179, 182, 21);
+      color: white;
+      border: 1px solid #ccc;
+    }
+    background-color: white;
+    color: black;
+  }
+
+  &--yes {
+    padding: 0.5rem 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 5rem;
 
     text-align: center;
     transition: background-color 0.6s ease;
     font-size: 17px;
     font-weight: 500;
 
-    &:hover {
-      background-color: #a1230d;
-      color: white;
+     &:hover {
+      border: 1px solid #ccc;
     }
+
+    background-color: #0a9e4d;
+  }
+
+  &--no {
+    padding: 0.5rem 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 5rem;
+
+    text-align: center;
+    transition: background-color 0.6s ease;
+    font-size: 17px;
+    font-weight: 500;
+
+     &:hover {
+      background-color: darkred;
+      color: white;
+      border: 1px solid #ccc;
+    }
+
+    background-color: #0a9e4d;
   }
 }

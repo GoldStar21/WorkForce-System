@@ -1,87 +1,92 @@
-.cars {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 0;
-  gap: 1.5rem;
-  height: calc(100% - 3rem);
-  overflow: hidden;
-}
-/*
-.carss {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 0;
-  gap: 1.5rem;
-  height: calc(100% - 3rem);
-  overflow: hidden;
 
-  &__form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    border: 1px solid #333;
-    padding: 1.5rem 2rem;
-    max-height: 650px;
+
+.carsTable {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+  
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    min-width: 900px; // sprječava lomljenje kolona
   }
 
-  &__container {
-    display: flex;
-    flex-direction: column;
+  &__thead {
+    background-color: #f3f4f6;
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
 
-  &__formTitle {
-    font-size: 1rem;
-    letter-spacing: 0.3px;
+  &__th {
+    padding: 0.75rem 0.5rem;
     text-align: center;
-    margin-bottom: 1.5rem;
-  }
-
-  &__label {
-    font-size: 1rem;
     font-weight: 600;
     color: #333;
-    margin-bottom: 0.4rem;
-    letter-spacing: 0.3px;
+    border-bottom: 2px solid #ddd;
+    white-space: nowrap;
   }
 
-  &__input {
-    padding: 0.7rem 1rem;
-    border: 1px solid #d0d0d0;
-    border-radius: 0.6rem;
-    background: #fff;
-    font-size: 1rem;
-    transition: border-color 0.2s, box-shadow 0.2s;
+  &__td {
+    padding: 0.6rem 0.5rem;
+    text-align: center;
+    color: #444;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    letter-spacing: 0.6px;
 
-    &:focus {
-      border-color: #4f7df3;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(79, 125, 243, 0.2);
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__tr {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f9fafb;
     }
   }
 
-  &__checkboxLabel {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.3px;
+  /* Zebra effect (čitljivost) */
+  &__tbody &__tr:nth-child(even) {
+    background-color: #fcfcfc;
   }
 
-  &__radioLabel {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #333;
-    margin-bottom: 0.3rem;
-    letter-spacing: 0.3px;
+  &__buttons {
+    //display: flex;
+    //justify-content: center;
+    //gap: 0.5rem;
+    //white-space: nowrap;
+
+    padding: 0.2rem 0;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background-color: inherit;
+
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
   }
 
-  &__wrapper {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-  }
+/*
+.carsTable {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem 0;
+  gap: 1.5rem;
+  height: calc(100% - 3rem);
+  overflow: hidden;
+
+  
+
+  
 
   &__table {
     width: 100%;

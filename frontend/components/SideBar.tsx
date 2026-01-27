@@ -7,6 +7,7 @@ import { GrLogout } from "react-icons/gr";
 import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { IoHome } from "react-icons/io5";
 
 
 const SideBar = () => {
@@ -52,8 +53,15 @@ const SideBar = () => {
           onClick={() => setIsCollapsed(!isCollapsed)}
         />
       </div>
+      
 
       <div className="sidebar__menu">
+
+ <div className="sidebar__home" onClick={() => router.push("/dashboard")}>
+          <IoHome className="sidebar__icon" />
+          {!isCollapsed && <span className="sidebar__text">HOME</span>}
+        </div>
+
         <div className="sidebar__item" onClick={() => router.push("/assemblers")}>
           <FaUser className="sidebar__icon" />
           {!isCollapsed && <span className="sidebar__text">Employees</span>}

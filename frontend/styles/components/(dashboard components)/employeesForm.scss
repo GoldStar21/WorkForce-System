@@ -1,0 +1,79 @@
+.assemblersForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
+  max-height: 600px;
+  max-width: 420px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  &__formTitle {
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+    font-weight: 700;
+    text-align: center;
+    color: #111827;
+    margin-bottom: 1.5rem;
+  }
+
+  &__label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  &__input {
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+    font-size: 0.95rem;
+
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: #2563eb;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+  }
+
+  &__checkboxLabel,
+  &__radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #374151;
+
+    cursor: pointer;
+  }
+
+  &__checkboxLabel input,
+  &__radioLabel input {
+    accent-color: #2563eb;
+    cursor: pointer;
+  }
+
+  /* Optional UX polish */
+  &__container:hover &__input {
+    border-color: #9ca3af;
+  }
+}

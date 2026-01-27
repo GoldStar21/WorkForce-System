@@ -1,6 +1,6 @@
 import users from "./api2";
 
-
+// TypeScript konfiguracija
 
 export interface AssemblerRequest {
   name: string;
@@ -44,9 +44,7 @@ export interface CarResponse {
 
 
 // Funkcija za kreiranje novog assemblera
-export const createAssembler = async (
-  assembler: AssemblerRequest
-): Promise<AssemblerResponse> => {
+export const createAssembler = async (assembler: AssemblerRequest): Promise<AssemblerResponse> => {
   const response = await users.post<AssemblerResponse>("", assembler);
   return response.data;
 };
