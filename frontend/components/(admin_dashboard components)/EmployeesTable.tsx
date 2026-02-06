@@ -18,10 +18,11 @@ type EmployeeType = {
 type EmployeesTableProps = {
   employees: EmployeeType[];
   setEmployees: React.Dispatch<React.SetStateAction<EmployeeType[]>>;
+  onEdit: (employee: EmployeeType) => void;
 };
 
 
-const EmployeesTable = ({ employees, setEmployees }: EmployeesTableProps) => {
+const EmployeesTable = ({ employees, setEmployees, onEdit }: EmployeesTableProps) => {
   const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
   const [employeeToDelete, setEmployeeToDelete] = useState<number | null>(null);
 
@@ -46,68 +47,6 @@ const EmployeesTable = ({ employees, setEmployees }: EmployeesTableProps) => {
     }
   };
   
-{/*
-  type Employee = {
-    id: number;
-    name: string;
-    surname: string;
-    email: string;
-    languages: string[];
-    job: string;
-  };
-
-  
-
-  // 1. Delete function
-  const handleDelete = async (id: number): Promise<void> => {
-    try {
-      await deleteAssembler(id);
-
-      setEmployees((previous) =>
-        previous.filter((employees) => employees.id !== id)
-      );
-
-      toast.success("Assembler successfully deleted!", { duration: 4000 });
-    } catch (error) {
-      toast.error("Error occured while deleting assembler!", {
-        duration: 4000,
-      });
-    }
-  };
-
-  
-  // KLIKOM NA IKONE ONE TRI DA SE OTVARA STA TREBA A DA UKINEM DROPDOWN MENU JER JE SUVISAN
-
-  // ----------------------------CONFIRMATION DIALOG-----------------------------------------
- 
-
-  // State for dialog
-  const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
-
-  // State for employee to delete
-  const [employeeToDelete, setEmployeeToDelete] = useState<number | null>(null);
-
-  // Open dialog
-  const openDeleteDialog = (id: number) => {
-    setEmployeeToDelete(id);
-    setConfirmationDialogOpen(true);
-  };
-
-  // Close dialog
-  const closeDialog = () => setConfirmationDialogOpen(false);
-
-  // Dialog delete
-  const confirmDelete = async () => {
-    if (employeeToDelete === null) return;
-
-    try {
-      await handleDelete(employeeToDelete);
-    } finally {
-      setConfirmationDialogOpen(false);
-      setEmployeeToDelete(null);
-    }
-  };*/}
- // ----------------------------------------------------------------------------------------
 
   return (
     <div className="employeeTable">
@@ -136,7 +75,7 @@ const EmployeesTable = ({ employees, setEmployees }: EmployeesTableProps) => {
               </td>
               <td className="employeeTable__td">{employee.job}</td>
               <td className="employeeTable__buttons">
-                <Button label="EDIT" modifier="button--edit" />
+                <Button label="EDIT" modifier="button--edit" onClick={() => onEdit(employee)}/>
                 <Button
                   label="DELETE"
                   //onClick={() => handleDelete(employee.id)}

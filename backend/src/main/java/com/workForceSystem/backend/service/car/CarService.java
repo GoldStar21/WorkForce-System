@@ -51,4 +51,28 @@ public class CarService {
         carResponseDTO.setTuv(car.getTuv());
         return carResponseDTO;
     }
+
+    // Method for car update
+    public CarResponseDTO updateExistingCar(Long id, CarRequestDTO carRequestDTO) {
+
+        Car car = carRepository.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));
+
+        car.setMake(carRequestDTO.getMake());
+        car.setModel(carRequestDTO.getModel());
+        car.setYear(carRequestDTO.getYear());
+        car.setTuv(carRequestDTO.getTuv());
+        car.setFuel(carRequestDTO.getFuel());
+        car.setPlates(carRequestDTO.getPlates());
+
+        Car SavedCar = carRepository.save(car);
+        return convertToDTO(SavedCar);
+    }
+
+    public void deleteCar(Long id) {
+
+        if(!carRepository.existsById(id)) {
+            throw new RuntimeException("Assembler not found");
+        }
+        carRepository.deleteById(id);
+    }
 }

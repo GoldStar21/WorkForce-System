@@ -1,9 +1,11 @@
 .cars {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   padding: 1.5rem 0;
   gap: 1.5rem;
   height: calc(100% - 3rem);
+  //height: calc(100% - 3rem);
   overflow: hidden;
 }
 /*

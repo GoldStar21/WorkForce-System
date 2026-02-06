@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Button";
-import { useEmployeeForm } from "@/hooks/useEmployeeForm";
+import { useEmployee } from "@/hooks/useEmployeeHook";
+import { useEffect, useState } from "react";
 
 type EmployeeType = {
   id: number;
@@ -12,33 +13,40 @@ type EmployeeType = {
 };
 
 type EmployeesFormProps = {
-  employees: EmployeeType[];
-  setEmployees: React.Dispatch<React.SetStateAction<EmployeeType[]>>;
+  employees: EmployeeType[],
+  setEmployees: React.Dispatch<React.SetStateAction<EmployeeType[]>>,
+  
+  selectedEmployee: EmployeeType | null,
+  setSelectedEmployee: React.Dispatch<React.SetStateAction<EmployeeType | null>>,
 };
 
-const EmployeesForm = ({ employees, setEmployees }: EmployeesFormProps) => {
-  const { form, inputChange, checkboxChange, jobChange, submit } =
-    useEmployeeForm(employees, setEmployees);
 
-  //    const [employeesInTheTable, setEmployeesInTheTable] = useState<EmployeeType[]>([]);
+
+
+const EmployeesForm = ({ employees, setEmployees, selectedEmployee, setSelectedEmployee }: EmployeesFormProps) => {
+  const { form, setForm, inputChange, checkboxControl, radiobuttonChange, submitForm,listOpen,setListOpen,LANGUAGE_OPTIONS,editMode,formReset} =
+    useEmployee(employees, setEmployees, selectedEmployee, setSelectedEmployee);
+
+     
+
 
   return (
     <form
       className="assemblersForm"
       onSubmit={(e) => {
         e.preventDefault();
-        submit();
+        submitForm();
       }}
     >
-      <div className="assemblers__container">
-        <h2 className="assemblers__formTitle">CREATE NEW EMPLOYEE</h2>
-        <label htmlFor="name" className="assemblers__label">
+      <div className="assemblersForm__container">
+        <h2 className="assemblersForm__formTitle">{editMode ? "UPDATE EMPLOYEE" : "CREATE NEW EMPLOYEE"}</h2>
+        <label htmlFor="name" className="assemblersForm__label">
           NAME:
         </label>
         <input
           id="name"
           type="text"
-          className="assemblers__input"
+          className="assemblersForm__input"
           name="name"
           placeholder="Enter name"
           autoComplete="off"
@@ -48,14 +56,14 @@ const EmployeesForm = ({ employees, setEmployees }: EmployeesFormProps) => {
         />
       </div>
 
-      <div className="assemblers__container">
-        <label htmlFor="surname" className="assemblers__label">
+      <div className="assemblersForm__container">
+        <label htmlFor="surname" className="assemblersForm__label">
           SURNAME:
         </label>
         <input
           id="surname"
           type="text"
-          className="assemblers__input"
+          className="assemblersForm__input"
           name="surname"
           placeholder="Enter surname"
           autoComplete="off"
@@ -65,14 +73,14 @@ const EmployeesForm = ({ employees, setEmployees }: EmployeesFormProps) => {
         />
       </div>
 
-      <div className="assemblers__container">
-        <label htmlFor="email" className="assemblers__label">
+      <div className="assemblersForm__container">
+        <label htmlFor="email" className="assemblersForm__label">
           E-MAIL:
         </label>
         <input
           id="email"
           type="text"
-          className="assemblers__input"
+          className="assemblersForm__input"
           name="email"
           placeholder="Enter email adress"
           autoComplete="off"
@@ -82,7 +90,35 @@ const EmployeesForm = ({ employees, setEmployees }: EmployeesFormProps) => {
         />
       </div>
 
-      {/* Mogu se izabrati sva checkbox-a ali nikako tri */}
+      {/* MULTI SELECT LANGUAGES */}
+      <div className="assemblersForm__container">
+        <label className="assemblersForm__label">LANGUAGES:</label>
+
+        <div className="assemblersForm__input"
+          onClick={() => setListOpen((prev) => !prev)}
+        >
+          {form.languages.length > 0 ? form.languages.join(", ") : "Select languages"}
+        </div>
+
+        {listOpen && (
+          <ul className="assemblersForm__list">
+            {LANGUAGE_OPTIONS.map((lang) => (
+              <li key={lang} className="assemblersForm__listItem">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={form.languages.includes(lang)}
+                    onChange={() => checkboxControl(lang)}
+                  />
+                  {lang}
+                </label>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* Mogu se izabrati sva checkbox-a ali nikako tri 
       <div className="assemblers__container">
         <label className="assemblers__label">LANGUAGES:</label>
 
@@ -91,8 +127,8 @@ const EmployeesForm = ({ employees, setEmployees }: EmployeesFormProps) => {
             type="checkbox"
             id="english"
             name="languages"
-            value="English"
-            checked={form.languages.includes("English")}
+            value="english"
+            checked={form.languages.includes("english")}
             onChange={checkboxChange}
           />
           English
@@ -103,8 +139,8 @@ const EmployeesForm = ({ employees, setEmployees }: EmployeesFormProps) => {
             type="checkbox"
             id="german"
             name="languages"
-            value="German"
-            checked={form.languages.includes("German")}
+            value="german"
+            checked={form.languages.includes("german")}
             onChange={checkboxChange}
           />
           German
@@ -115,41 +151,48 @@ const EmployeesForm = ({ employees, setEmployees }: EmployeesFormProps) => {
             type="checkbox"
             id="none"
             name="languages"
-            value="None"
-            checked={form.languages.includes("None")}
+            value="none"
+            checked={form.languages.includes("none")}
             onChange={checkboxChange}
           />
           None
         </label>
-      </div>
+      </div> */}
 
-      <div className="assemblers__container">
-        <label className="assemblers__label">JOB DESCRIPTION:</label>
+      <div className="assemblersForm__container">
+        <label className="assemblersForm__label">JOB DESCRIPTION:</label>
 
-        <label className="assemblers__radioLabel">
+        <label className="assemblersForm__radioLabel">
           <input
             type="radio"
             name="job"
-            value="Assembler"
-            checked={form.job === "Assembler"}
-            onChange={jobChange}
+            value="assembler"
+            checked={form.job === "assembler"}
+            onChange={radiobuttonChange}
           />
           Assembler
         </label>
 
-        <label className="assemblers__radioLabel">
+        <label className="assemblersForm__radioLabel">
           <input
             type="radio"
             name="job"
-            value="Electrician"
-            checked={form.job === "Electrician"}
-            onChange={jobChange}
+            value="electrician"
+            checked={form.job === "electrician"}
+            onChange={radiobuttonChange}
           />
           Electrician
         </label>
       </div>
 
       <Button label="Save" type="submit" modifier="button--save" />
+      {editMode && (
+        <Button label="Cancel" type="button" modifier="button--cancel"
+        onClick={() => {
+        setSelectedEmployee(null);
+        formReset();
+      }} />
+      )}
     </form>
   );
 };

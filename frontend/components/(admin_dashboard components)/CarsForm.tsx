@@ -1,8 +1,7 @@
 "use client"
 
 import Button from "@/components/Button";
-import { useCarForm } from "@/hooks/useCarForm";
-import { useEffect } from "react";
+import { useCarForm } from "@/hooks/useCarHook";
 
 type CarsType = {
   id: number;
@@ -18,27 +17,17 @@ type CarsTypeProps = {
   cars: CarsType[];
   setCars: React.Dispatch<React.SetStateAction<CarsType[]>>;
   selectedCar: CarsType | null;
+  setSelectedCar: React.Dispatch<React.SetStateAction<CarsType | null>>
 };
 
-const CarsForm = ({ cars, setCars, selectedCar}: CarsTypeProps) => {
-  const { form, setForm, inputControll, radioButtonControll, submitForm, } = useCarForm(
+const CarsForm = ({ cars, setCars, selectedCar, setSelectedCar }: CarsTypeProps) => {
+  const { form, setForm, inputControll, radioButtonControll, submitForm, editMode } = useCarForm(
     cars,
     setCars,
+    selectedCar,
+    setSelectedCar 
   );
 
-  useEffect(() => {
-    if (!selectedCar) return;
-
-    setForm({
-      make: selectedCar.make,
-      model: selectedCar.model,
-      year: selectedCar.year,
-      tuv: selectedCar.tuv,
-      plates: selectedCar.plates,
-      fuel: selectedCar.fuel,
-    });
-  }, [selectedCar]);
- 
   return (
     <form
       className="carsForm"
@@ -48,7 +37,7 @@ const CarsForm = ({ cars, setCars, selectedCar}: CarsTypeProps) => {
       }}
     >
       <div className="carsForm__container">
-        <h2 className="carsForm__formTitle">CREATE NEW CAR</h2>
+        <h2 className="carsForm__formTitle">{editMode ? "UPDATE CAR" : "CREATE NEW CAR"}</h2>
         <label htmlFor="make" className="carsForm__label">
           MAKE:
         </label>
@@ -163,7 +152,14 @@ const CarsForm = ({ cars, setCars, selectedCar}: CarsTypeProps) => {
         </div>
       </div>
 
-      <Button label="Save" type="submit" modifier="button--save" />
+      <Button label={editMode ? "Update" : "Save"} type="submit" modifier="button--save" />
+      {editMode && (
+        <Button label="Cancel" type="button" modifier="button--cancel"
+        onClick={() => {
+        setSelectedCar(null);
+        setForm({ make: "", model: "", year: "", tuv: "", plates: "", fuel: "" });
+      }} />
+      )}
     </form>
   );
 };

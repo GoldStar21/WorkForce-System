@@ -22,6 +22,12 @@ public class AssemblerController {
         return ResponseEntity.ok(assemblerResponseDTO);
     }
 
+    @PutMapping("/{id}")
+    ResponseEntity<AssemblerResponseDTO> updateAssembler(@PathVariable Long id, @RequestBody AssemblerRequestDTO assemblerRequestDTO) {
+        AssemblerResponseDTO responseDTO = assemblerService.updateAssembler(id, assemblerRequestDTO);
+        return ResponseEntity.ok(responseDTO);
+    }
+
     // DAJ MI VODEEEE
     @GetMapping
     public List<AssemblerResponseDTO> getAllAssemblers() {

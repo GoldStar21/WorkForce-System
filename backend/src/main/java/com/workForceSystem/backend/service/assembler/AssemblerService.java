@@ -2,9 +2,6 @@ package com.workForceSystem.backend.service.assembler;
 
 import com.workForceSystem.backend.dto.assembler.AssemblerRequestDTO;
 import com.workForceSystem.backend.dto.assembler.AssemblerResponseDTO;
-import com.workForceSystem.backend.dto.car.CarRequestDTO;
-import com.workForceSystem.backend.dto.car.CarResponseDTO;
-import com.workForceSystem.backend.model.car.Car;
 import com.workForceSystem.backend.model.employee.Assembler;
 import com.workForceSystem.backend.model.employee.Language;
 import com.workForceSystem.backend.repository.AssemblerRepository;
@@ -34,16 +31,13 @@ public class AssemblerService {
         assembler.setJob(requestDto.getJob());
 
         List<Language> languages = requestDto.getLanguages().stream()
-                .map(langName -> {
-                    Language language = languageRepository.findByLanguage(langName)
-                            .orElseGet(() -> {
-                                Language newLang = new Language();
-                                newLang.setLanguage(langName);
-                                return newLang;
-                            });
-                    language.setAssembler(assembler);
-                    return language;
-                }).toList();
+                        .map(langName ->  {
+                            Language language = new Language();
+                            language.setLanguage(langName);
+                            language.setAssembler(assembler);
+                            return language;
+                        })
+                                .toList();
 
         assembler.setLanguages(languages);
         Assembler savedAssembler = assemblerRepository.save(assembler);
@@ -86,5 +80,43 @@ public class AssemblerService {
             throw new RuntimeException("Assembler not found");
         }
         assemblerRepository.deleteById(id);
+    }
+
+    public AssemblerResponseDTO updateAssembler(Long id, AssemblerRequestDTO requestDto) {
+
+        Assembler assembler = assemblerRepository.findById(id).orElseThrow(() -> new RuntimeException("Assembler not found"));
+
+        assembler.setName(requestDto.getName());
+        assembler.setSurname(requestDto.getSurname());
+        assembler.setEmail(requestDto.getEmail());
+        //assembler.setLanguages(requestDto.getLanguages());
+        assembler.setJob(requestDto.getJob());
+
+        // 1️⃣ Obriši stare jezike (orphanRemoval će ih maknuti iz baze)
+        assembler.getLanguages().clear();
+
+        // 2️⃣ Dodaj nove
+        List<Language> languages = requestDto.getLanguages().stream()
+                .map(langName -> {
+                    Language language = new Language();
+                    language.setLanguage(langName);
+                    language.setAssembler(assembler);
+                    return language;
+                })
+                .toList();
+
+        
+
+
+
+        assembler.getLanguages().addAll(languages);
+
+
+
+
+        Assembler savedAssembler = assemblerRepository.save(assembler);
+        return convertEntityToDTO(savedAssembler);
+
+
     }
 }

@@ -23,6 +23,6 @@ public class Assembler {
     private String email;
     private String job;
 
-    @OneToMany(mappedBy = "assembler", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "assembler", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Language> languages;
 }

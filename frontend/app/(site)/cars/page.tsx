@@ -1,9 +1,11 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { createCar, getAllCars, deleteCar } from "@/lib/api3service";
+import { useEffect, useState } from "react";
+import {getAllCars} from "@/lib/api3service";
 import CarsForm from "@/components/(admin_dashboard components)/CarsForm";
 import CarsTable from "@/components/(admin_dashboard components)/CarsTable";
+import { useCarForm } from "@/hooks/useCarHook";
+import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 const Cars = () => {
 
@@ -23,6 +25,9 @@ const Cars = () => {
   // State for selected car for edit purposes
   const [selectedCar, setSelectedCar] = useState<CarsType | null>(null);
 
+  // Parent poziva hook
+  const carForm = useCarForm(cars, setCars, selectedCar, setSelectedCar);
+
 
 
   useEffect(() => {
@@ -40,8 +45,17 @@ const Cars = () => {
   return (
     <div className="cars">
 
-      <CarsForm cars={cars} setCars={setCars} selectedCar={selectedCar}/>
-      <CarsTable cars={cars} setCars={setCars} onEdit={setSelectedCar}/>
+      <CarsForm cars={cars} setCars={setCars} selectedCar={selectedCar}  setSelectedCar={setSelectedCar}/>
+      <CarsTable cars={cars} setCars={setCars} onEdit={setSelectedCar} onDelete={carForm.openDeleteDialog}/>
+
+       {carForm.isConfirmationDialogOpen && (
+        <ConfirmationDialog
+          closeDialog={carForm.closeDeleteDialog}
+          confirm={carForm.confirmDelete}
+        />
+      )}
+
+      
 
     </div>
   );
