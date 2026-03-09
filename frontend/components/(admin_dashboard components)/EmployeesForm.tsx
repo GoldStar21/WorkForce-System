@@ -1,35 +1,35 @@
 "use client";
 import Button from "@/components/Button";
-import { useEmployee } from "@/hooks/useEmployeeHook";
-import { useEffect, useState } from "react";
-
-type EmployeeType = {
-  id: number;
-  name: string;
-  surname: string;
-  email: string;
-  languages: string[];
-  job: string;
-};
+import { EmployeeForm } from "@/hooks/useEmployeeHook";
+import React from "react";
 
 type EmployeesFormProps = {
-  employees: EmployeeType[],
-  setEmployees: React.Dispatch<React.SetStateAction<EmployeeType[]>>,
-  
-  selectedEmployee: EmployeeType | null,
-  setSelectedEmployee: React.Dispatch<React.SetStateAction<EmployeeType | null>>,
+  form: EmployeeForm;
+  inputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  radiobuttonChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  submitForm: () => void;
+  checkboxControl: (lang: string) => void;
+  listOpen: boolean;
+  setListOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  LANGUAGE_OPTIONS: string[];
+  editMode: boolean;
+  formReset: () => void;
+  cancelEdit: () => void;
 };
 
-
-
-
-const EmployeesForm = ({ employees, setEmployees, selectedEmployee, setSelectedEmployee }: EmployeesFormProps) => {
-  const { form, setForm, inputChange, checkboxControl, radiobuttonChange, submitForm,listOpen,setListOpen,LANGUAGE_OPTIONS,editMode,formReset} =
-    useEmployee(employees, setEmployees, selectedEmployee, setSelectedEmployee);
-
-     
-
-
+const EmployeesForm = ({
+  form,
+  inputChange,
+  radiobuttonChange,
+  submitForm,
+  checkboxControl,
+  listOpen,
+  setListOpen,
+  LANGUAGE_OPTIONS,
+  editMode,
+  formReset,
+  cancelEdit,
+}: EmployeesFormProps) => {
   return (
     <form
       className="assemblersForm"
@@ -39,7 +39,9 @@ const EmployeesForm = ({ employees, setEmployees, selectedEmployee, setSelectedE
       }}
     >
       <div className="assemblersForm__container">
-        <h2 className="assemblersForm__formTitle">{editMode ? "UPDATE EMPLOYEE" : "CREATE NEW EMPLOYEE"}</h2>
+        <h2 className="assemblersForm__formTitle">
+          {editMode ? "UPDATE EMPLOYEE" : "CREATE NEW EMPLOYEE"}
+        </h2>
         <label htmlFor="name" className="assemblersForm__label">
           NAME:
         </label>
@@ -94,10 +96,13 @@ const EmployeesForm = ({ employees, setEmployees, selectedEmployee, setSelectedE
       <div className="assemblersForm__container">
         <label className="assemblersForm__label">LANGUAGES:</label>
 
-        <div className="assemblersForm__input"
+        <div
+          className="assemblersForm__input"
           onClick={() => setListOpen((prev) => !prev)}
         >
-          {form.languages.length > 0 ? form.languages.join(", ") : "Select languages"}
+          {form.languages.length > 0
+            ? form.languages.join(", ")
+            : "Select languages"}
         </div>
 
         {listOpen && (
@@ -117,47 +122,6 @@ const EmployeesForm = ({ employees, setEmployees, selectedEmployee, setSelectedE
           </ul>
         )}
       </div>
-
-      {/* Mogu se izabrati sva checkbox-a ali nikako tri 
-      <div className="assemblers__container">
-        <label className="assemblers__label">LANGUAGES:</label>
-
-        <label className="assemblers__checkboxLabel">
-          <input
-            type="checkbox"
-            id="english"
-            name="languages"
-            value="english"
-            checked={form.languages.includes("english")}
-            onChange={checkboxChange}
-          />
-          English
-        </label>
-
-        <label className="assemblers__checkboxLabel">
-          <input
-            type="checkbox"
-            id="german"
-            name="languages"
-            value="german"
-            checked={form.languages.includes("german")}
-            onChange={checkboxChange}
-          />
-          German
-        </label>
-
-        <label className="assemblers__checkboxLabel">
-          <input
-            type="checkbox"
-            id="none"
-            name="languages"
-            value="none"
-            checked={form.languages.includes("none")}
-            onChange={checkboxChange}
-          />
-          None
-        </label>
-      </div> */}
 
       <div className="assemblersForm__container">
         <label className="assemblersForm__label">JOB DESCRIPTION:</label>
@@ -187,11 +151,14 @@ const EmployeesForm = ({ employees, setEmployees, selectedEmployee, setSelectedE
 
       <Button label="Save" type="submit" modifier="button--save" />
       {editMode && (
-        <Button label="Cancel" type="button" modifier="button--cancel"
-        onClick={() => {
-        setSelectedEmployee(null);
-        formReset();
-      }} />
+        <Button
+          label="Cancel"
+          type="button"
+          modifier="button--cancel"
+          onClick={() => {
+            formReset();
+          }}
+        />
       )}
     </form>
   );

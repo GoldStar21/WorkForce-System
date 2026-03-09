@@ -4,7 +4,7 @@ import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
 import Button from "./Button";
-import { login } from "@/lib/auth";
+import { login } from "@/lib/services/auth_service";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");

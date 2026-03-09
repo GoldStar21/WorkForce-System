@@ -1,4 +1,4 @@
-.carsForm {
+.groupForm {
   display: flex;
   flex-direction: column;
   gap: 1.75rem;
@@ -12,29 +12,16 @@
   //max-height: 630px;
   max-height: calc(100% - 3rem);
   max-width: 420px;
+  position: relative;
 
   &__container {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    position: relative;
   }
 
-  &__containerFuel {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-  }
-
-  &__fuelLabel {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #374151;
-    text-transform: uppercase;
-    letter-spacing: 0.6x;
-    margin-bottom: 0.4rem;
-  }
-
-  &__formTitle {
+  &__title {
     font-size: 1.1rem;
     letter-spacing: 0.3px;
     font-weight: 700;
@@ -69,27 +56,37 @@
     }
   }
 
-  &__checkboxLabel,
-  &__radioLabel {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: #374151;
-
-    cursor: pointer;
-  }
-
-  &__checkboxLabel input,
-  &__radioLabel input {
-    accent-color: #2563eb;
-    cursor: pointer;
-  }
-
-  /* Optional UX polish */
   &__container:hover &__input {
     border-color: #9ca3af;
+  }
+
+  &__dropdown {
+    position: absolute;
+    top: 100%; // odmah ispod button/input
+    left: 0;
+    width: 95%; // prati širinu containera
+
+    z-index: 10;
+    max-height: 260px;
+    overflow-y: auto;
+
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+    list-style: none;
+    margin: 0; // ← uklanja default margin
+    padding: 4px; // ← mali unutrašnji spacing (NE 40px kao default ul)
+  }
+
+  &__li {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer; // <- da klik vizualno radi
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: #f3f4f6; // <- hover efekt da se vidi koja stavka je izabrana
+    }
   }
 }

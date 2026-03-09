@@ -1,5 +1,6 @@
 "use client";
-import { logout } from "@/lib/auth";
+
+import { logout } from "@/lib/services/auth_service";
 import { FaUser } from "react-icons/fa";
 import { FaCarAlt } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
@@ -62,7 +63,7 @@ const SideBar = () => {
           {!isCollapsed && <span className="sidebar__text">HOME</span>}
         </div>
 
-        <div className="sidebar__item" onClick={() => router.push("/assemblers")}>
+        <div className="sidebar__item" onClick={() => router.push("/employees")}>
           <FaUser className="sidebar__icon" />
           {!isCollapsed && <span className="sidebar__text">Employees</span>}
         </div>
@@ -76,7 +77,7 @@ const SideBar = () => {
           <FaCarAlt className="sidebar__icon" />
           {!isCollapsed && <span className="sidebar__text">Cars</span>}
         </div>
-        <div className="sidebar__item">
+        <div className="sidebar__item" onClick={() => router.push("/groups")}>
           <FaUsers className="sidebar__icon" />
           {!isCollapsed && <span className="sidebar__text">Groups</span>}
         </div>

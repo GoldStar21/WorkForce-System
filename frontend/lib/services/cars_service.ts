@@ -32,10 +32,7 @@ return response.data;
 };
 
 // 2. Update
-export const carUpdate= async (
-  id: number,
-  data: CarRequest
-): Promise<CarsType> => {
+export const carUpdate= async (id: number,data: CarRequest): Promise<CarsType> => {
   const response = await api_config.put<CarsType>(`/cars/${id}`, data);
   return response.data;
 };
@@ -43,6 +40,12 @@ export const carUpdate= async (
 // 3. Delete
 export const deleteCar = async (id: number): Promise<void> => {
   await api_config.delete(`/cars/${id}`);
+}
+
+// 4. Get all cars
+export const getAllCars = async (): Promise<CarResponse[]> => {
+  const response = await api_config.get<CarResponse[]>("/cars");
+  return response.data;
 }
 
 

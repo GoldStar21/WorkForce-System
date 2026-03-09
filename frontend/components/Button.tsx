@@ -1,7 +1,7 @@
 "use client";
 
 interface ButtonProps {
-  label: string;
+  label: React.ReactNode;
   modifier?: string;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;

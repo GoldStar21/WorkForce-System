@@ -3,19 +3,16 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 20px 0;
-  
+
   height: calc(100% - 40px);
   // raste da popuni prostor
   //gap: 0.2rem;
-
 
   &__select {
     display: flex;
     justify-content: center;
     margin-bottom: 0.8rem;
   }
-
-  
 
   &__dropdown {
     width: 100px;
@@ -47,86 +44,90 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    gap: 1rem;
   }
 
   &__info {
     display: flex;
     flex-direction: column;
     align-items: center;
-    //background-color: #d9d9d9;
-    //box-shadow: 5px 8px 5px rgba(0, 0, 0, 0.3);
-    //border: 1px solid #ccc;
-    //border-radius: 10px;
+    justify-content: center;
     min-width: 150px;
-    max-width: 400px;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f8f9fa, #ffffff);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
 
-    //&:hover {
-      //background-color: #e8f1f5;
-    //}
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
   }
 
   &__title {
-    font-size: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #888;
     margin: 0;
-    margin-top: 10px;
+    text-transform: uppercase;
   }
 
   &__number {
     font-size: 3rem;
-    margin: 15px 0;
+    font-weight: 700;
+    margin: 0.5rem 0 0;
+    color: #1a1a1a;
+    line-height: 1;
   }
 
   @include respondBetween(0, $breakpoint-mobile) {
-
-    
-    
-
     &__map {
       padding: 0 10px;
     }
-     &__dropdown {
-    width: 130px;
-    padding: 3px 8px;
-    font-size: 0.8rem;
-    margin-bottom: 5px;
+    &__dropdown {
+      width: 130px;
+      padding: 3px 8px;
+      font-size: 0.8rem;
+      margin-bottom: 5px;
 
-    border: none;
-    border-radius: 2px;
-    background-color: #fff;
+      border: none;
+      border-radius: 2px;
+      background-color: #fff;
 
-    cursor: pointer;
+      cursor: pointer;
 
-    &:hover {
-      border-color: inherit;
+      &:hover {
+        border-color: inherit;
+      }
+
+      &:focus {
+        outline: none;
+        border-color: #333;
+      }
+      option[disabled] {
+        color: #888;
+      }
     }
 
-    &:focus {
-       outline: none;
-      border-color: #333;
+    &__info {
+      display: none;
     }
-    option[disabled] {
-      color: #888;
+
+    &__title {
+      font-size: 0.7rem;
+      margin-top: 10px;
+      font-weight: 500;
     }
-  }
 
-   
-
-  
-  &__info {
-    display: none;
-
-    
-  }
-
-  &__title {
-    font-size: 0.7rem;
-    margin-top: 10px;
-    font-weight: 500;
-  }
-
-  &__number {
-    font-size: 1.2rem;
-    margin: 0 0;
-  }
+    &__number {
+      font-size: 1.2rem;
+      margin: 0 0;
+    }
   }
 }
+

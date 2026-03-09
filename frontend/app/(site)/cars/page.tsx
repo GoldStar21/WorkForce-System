@@ -1,14 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import {getAllCars} from "@/lib/api3service";
+import { useState } from "react";
 import CarsForm from "@/components/(admin_dashboard components)/CarsForm";
 import CarsTable from "@/components/(admin_dashboard components)/CarsTable";
-import { useCarForm } from "@/hooks/useCarHook";
+import { useCarHook } from "@/hooks/useCarHook";
 import ConfirmationDialog from "@/components/ConfirmationDialog";
 
 const Cars = () => {
-
   type CarsType = {
     id: number;
     make: string;
@@ -22,41 +20,41 @@ const Cars = () => {
   // State for instant update in table when new employee is saved
   const [cars, setCars] = useState<CarsType[]>([]);
 
-  // State for selected car for edit purposes
-  const [selectedCar, setSelectedCar] = useState<CarsType | null>(null);
-
-  // Parent poziva hook
-  const carForm = useCarForm(cars, setCars, selectedCar, setSelectedCar);
-
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const carsData = await getAllCars();
-        setCars(carsData);
-      } catch (error) {
-        console.error("Error fetching cars:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  const {
+    form,
+    inputControll,
+    radioButtonControll,
+    submitForm,
+    editMode,
+    cancelEdit,
+    setSelectedCar,
+    isConfirmationDialogOpen,
+    openDeleteDialog,
+    closeDeleteDialog,
+    deleteConfirmation,
+  } = useCarHook(setCars);
 
   return (
     <div className="cars">
-
-      <CarsForm cars={cars} setCars={setCars} selectedCar={selectedCar}  setSelectedCar={setSelectedCar}/>
-      <CarsTable cars={cars} setCars={setCars} onEdit={setSelectedCar} onDelete={carForm.openDeleteDialog}/>
-
-       {carForm.isConfirmationDialogOpen && (
+      <CarsForm
+        form={form}
+        inputControll={inputControll}
+        radioButtonControll={radioButtonControll}
+        submitForm={submitForm}
+        editMode={editMode}
+        cancelEdit={cancelEdit}
+      />
+      <CarsTable
+        cars={cars}
+        onEdit={setSelectedCar}
+        onDelete={openDeleteDialog}
+      />
+      {isConfirmationDialogOpen && (
         <ConfirmationDialog
-          closeDialog={carForm.closeDeleteDialog}
-          confirm={carForm.confirmDelete}
+          closeDialog={closeDeleteDialog}
+          confirm={deleteConfirmation}
         />
       )}
-
-      
-
     </div>
   );
 };

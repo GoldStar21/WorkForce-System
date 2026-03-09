@@ -2,12 +2,8 @@
 import "../../styles/global.scss";
 import NavigationBar from "@/components/NavigationBar";
 import SideBar from "@/components/SideBar";
-import { ReactNode, useEffect, useState } from "react";
-import Dashboard from "./dashboard/page";
-import axios from "axios";
-import api from "@/lib/api";
+import { ReactNode} from "react";
 import { cookies } from "next/headers";
-import WorldMap from "@/components/WorldMap";
 import Footer from "@/components/Footer";
 
 

@@ -1,8 +1,8 @@
 package com.workForceSystem.backend.controller;
 
 
-import com.workForceSystem.backend.dto.LoginRequest;
-import com.workForceSystem.backend.dto.LoginResponse;
+import com.workForceSystem.backend.dto.login.LoginRequest;
+import com.workForceSystem.backend.dto.login.LoginResponse;
 import com.workForceSystem.backend.model.User;
 import com.workForceSystem.backend.service.JwtService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
 
     // Potrebno

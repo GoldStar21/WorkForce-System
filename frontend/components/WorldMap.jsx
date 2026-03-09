@@ -4,7 +4,7 @@
 import dynamic from "next/dynamic";
 
 // Dynamic import — disables SSR
-const LeafletMap = dynamic(() => import("./LeafletMap"), {
+const LeafletMap = dynamic(() => import("./LeafletMap.tsx"), {
   ssr: false,
 });
 

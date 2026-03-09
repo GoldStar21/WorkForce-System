@@ -1,7 +1,8 @@
 "use client"
 
 import Button from "@/components/Button";
-import { useCarForm } from "@/hooks/useCarHook";
+import { useCarHook } from "@/hooks/useCarHook";
+import { CarForm } from "@/hooks/useCarHook";
 
 type CarsType = {
   id: number;
@@ -13,21 +14,24 @@ type CarsType = {
   fuel: string;
 };
 
-type CarsTypeProps = {
-  cars: CarsType[];
-  setCars: React.Dispatch<React.SetStateAction<CarsType[]>>;
-  selectedCar: CarsType | null;
-  setSelectedCar: React.Dispatch<React.SetStateAction<CarsType | null>>
+type CarsFormProps = {
+  form: CarForm;
+  inputControll: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  radioButtonControll: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  submitForm: () => void;
+  editMode: boolean;
+  cancelEdit: () => void;
 };
 
-const CarsForm = ({ cars, setCars, selectedCar, setSelectedCar }: CarsTypeProps) => {
-  const { form, setForm, inputControll, radioButtonControll, submitForm, editMode } = useCarForm(
-    cars,
-    setCars,
-    selectedCar,
-    setSelectedCar 
-  );
 
+const CarsForm = ({
+  form,
+  inputControll,
+  radioButtonControll,
+  submitForm,
+  editMode,
+  cancelEdit,
+}: CarsFormProps) => {
   return (
     <form
       className="carsForm"
@@ -153,12 +157,8 @@ const CarsForm = ({ cars, setCars, selectedCar, setSelectedCar }: CarsTypeProps)
       </div>
 
       <Button label={editMode ? "Update" : "Save"} type="submit" modifier="button--save" />
-      {editMode && (
-        <Button label="Cancel" type="button" modifier="button--cancel"
-        onClick={() => {
-        setSelectedCar(null);
-        setForm({ make: "", model: "", year: "", tuv: "", plates: "", fuel: "" });
-      }} />
+     {editMode && (
+        <Button label="Cancel" type="button" modifier="button--cancel" onClick={cancelEdit} />
       )}
     </form>
   );

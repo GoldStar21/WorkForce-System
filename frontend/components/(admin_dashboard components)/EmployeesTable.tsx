@@ -1,53 +1,19 @@
 "use client";
-import { useEffect, useState } from "react";
+
 import Button from "@/components/Button";
-import { getAllAssemblers, deleteAssembler } from "@/lib/approved";
-import toast from "react-hot-toast";
-import ConfirmationDialog from "@/components/ConfirmationDialog";
-
-
-type EmployeeType = {
-  id: number;
-  name: string;
-  surname: string;
-  email: string;
-  languages: string[];
-  job: string;
-};
+import { EmployeeType } from "@/app/(site)/employees/page";
 
 type EmployeesTableProps = {
   employees: EmployeeType[];
-  setEmployees: React.Dispatch<React.SetStateAction<EmployeeType[]>>;
   onEdit: (employee: EmployeeType) => void;
+  openDeleteDialog: (id: number) => void;
 };
 
-
-const EmployeesTable = ({ employees, setEmployees, onEdit }: EmployeesTableProps) => {
-  const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
-  const [employeeToDelete, setEmployeeToDelete] = useState<number | null>(null);
-
-  const openDeleteDialog = (id: number) => {
-    setEmployeeToDelete(id);
-    setConfirmationDialogOpen(true);
-  };
-
-  const closeDialog = () => setConfirmationDialogOpen(false);
-
-  const confirmDelete = async () => {
-    if (employeeToDelete === null) return;
-    try {
-      await deleteAssembler(employeeToDelete);
-      setEmployees((prev) => prev.filter((e) => e.id !== employeeToDelete));
-      toast.success("Assembler deleted!", { duration: 4000 });
-    } catch (error) {
-      toast.error("Error deleting assembler!", { duration: 4000 });
-    } finally {
-      setConfirmationDialogOpen(false);
-      setEmployeeToDelete(null);
-    }
-  };
-  
-
+const EmployeesTable = ({
+  employees,
+  onEdit,
+  openDeleteDialog,
+}: EmployeesTableProps) => {
   return (
     <div className="employeeTable">
       <table className="employeeTable__table">
@@ -59,7 +25,7 @@ const EmployeesTable = ({ employees, setEmployees, onEdit }: EmployeesTableProps
             <th className="employeeTable__th">E-MAIL</th>
             <th className="employeeTable__th">LANGUAGES</th>
             <th className="employeeTable__th">JOB</th>
-            <th className="employeeTable__th">ACTIONS</th>
+            <th className="employeeTable__th"></th>
           </tr>
         </thead>
 
@@ -75,10 +41,13 @@ const EmployeesTable = ({ employees, setEmployees, onEdit }: EmployeesTableProps
               </td>
               <td className="employeeTable__td">{employee.job}</td>
               <td className="employeeTable__buttons">
-                <Button label="EDIT" modifier="button--edit" onClick={() => onEdit(employee)}/>
+                <Button
+                  label="EDIT"
+                  modifier="button--edit"
+                  onClick={() => onEdit(employee)}
+                />
                 <Button
                   label="DELETE"
-                  //onClick={() => handleDelete(employee.id)}
                   onClick={() => openDeleteDialog(employee.id)}
                   modifier="button--delete"
                 />
@@ -87,9 +56,6 @@ const EmployeesTable = ({ employees, setEmployees, onEdit }: EmployeesTableProps
           ))}
         </tbody>
       </table>
-      {isConfirmationDialogOpen && (
-        <ConfirmationDialog closeDialog={closeDialog} confirm={confirmDelete} />
-      )}
     </div>
   );
 };

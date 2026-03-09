@@ -1,8 +1,10 @@
 import { createCar, carUpdate, deleteCar } from "@/lib/services/cars_service";
 import { useEffect, useState } from "react";
+import { useSharedHook } from "./sharedHook/useSharedHook";
+import { getAllCars } from "@/lib/services/cars_service";
 import toast from "react-hot-toast";
 
-type CarForm = {
+export type CarForm = {
   make: string;
   model: string;
   year: string;
@@ -11,7 +13,7 @@ type CarForm = {
   fuel: string;
 };
 
-type CarsType = {
+export type CarsType = {
   id: number;
   make: string;
   model: string;
@@ -22,13 +24,9 @@ type CarsType = {
 };
 
 // Hook for CarForm
-export const useCarForm = (
-  cars: CarsType[],
+export const useCarHook = (
   setCars: React.Dispatch<React.SetStateAction<CarsType[]>>,
-  selectedCar: CarsType | null,
-  setSelectedCar: React.Dispatch<React.SetStateAction<CarsType | null>>,
 ) => {
-  
   // 1. Initial state of form
   const [form, setForm] = useState<CarForm>({
     make: "",
@@ -57,6 +55,9 @@ export const useCarForm = (
   const formReset = () => {
     setForm({ make: "", model: "", year: "", tuv: "", plates: "", fuel: "" });
   };
+
+  // State for selected car for edit purposes
+  const [selectedCar, setSelectedCar] = useState<CarsType | null>(null);
 
   // 4. Submit form (if car is selected for edit, use form as edit form else use it as regular form)
   const submitForm = async () => {
@@ -98,34 +99,30 @@ export const useCarForm = (
     });
   }, [selectedCar]);
 
-  // 6. Open/Close Delete dialog
-  const [isConfirmationDialogOpen, setConfirmationDialogOpen] = useState(false);
-  const [carToDelete, setCarToDelete] = useState<number | null>(null);
+  // FETCH
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const carsData = await getAllCars();
+        setCars(carsData);
+      } catch (error) {
+        console.error("Error fetching cars:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const openDeleteDialog = (id: number) => {
-    setCarToDelete(id);
-    setConfirmationDialogOpen(true);
+  const cancelEdit = () => {
+    setSelectedCar(null);
+    formReset();
   };
 
-  const closeDeleteDialog = () => {
-    setConfirmationDialogOpen(false);
-    setCarToDelete(null);
-  };
-
-  const confirmDelete = async () => {
-    if (carToDelete === null) return;
-
-    try {
-      await deleteCar(carToDelete);
-      setCars((prev) => prev.filter((e) => e.id !== carToDelete));
-      toast.success("Assembler deleted!", { duration: 4000 });
-    } catch (error) {
-      toast.error("Error deleting assembler!", { duration: 4000 });
-    } finally {
-      setConfirmationDialogOpen(false);
-      setCarToDelete(null);
-    }
-  };
+  const {
+    isConfirmationDialogOpen,
+    openDeleteDialog,
+    closeDeleteDialog,
+    deleteConfirmation,
+  } = useSharedHook(deleteCar, setCars);
 
   return {
     form,
@@ -133,11 +130,13 @@ export const useCarForm = (
     inputControll,
     radioButtonControll,
     submitForm,
+    formReset,
+    cancelEdit,
     editMode: !!selectedCar,
-
-    openDeleteDialog,
+    setSelectedCar,
     isConfirmationDialogOpen,
+    openDeleteDialog,
     closeDeleteDialog,
-    confirmDelete,
+    deleteConfirmation,
   };
 };

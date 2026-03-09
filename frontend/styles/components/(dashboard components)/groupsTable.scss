@@ -1,17 +1,16 @@
-.employeeTable {
-    width: 100%;
-        max-height: calc(100vh - 9.25rem);
-    overflow-x: auto;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    background-color: #ffffff;
-  
+.groupTable {
+  width: 100%;
+  max-height: calc(100vh - 9.25rem);
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  background-color: #ffffff;
 
   &__table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
-    min-width: 900px; // sprječava lomljenje kolona
+    min-width: 900px;
   }
 
   &__thead {
@@ -30,6 +29,14 @@
     white-space: nowrap;
   }
 
+  &__tr {
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #f9fafb;
+    }
+  }
+
   &__td {
     padding: 0.6rem 0.5rem;
     text-align: center;
@@ -44,25 +51,12 @@
     text-overflow: ellipsis;
   }
 
-  &__tr {
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: #f9fafb;
-    }
-  }
-
   /* Zebra effect (čitljivost) */
   &__tbody &__tr:nth-child(even) {
     background-color: #fcfcfc;
   }
 
   &__buttons {
-    //display: flex;
-    //justify-content: center;
-    //gap: 0.5rem;
-    //white-space: nowrap;
-
     padding: 0.2rem 0;
     text-align: center;
     border-bottom: 1px solid #eee;
@@ -72,4 +66,4 @@
     justify-content: center;
     gap: 0.5rem;
   }
-  }
+}

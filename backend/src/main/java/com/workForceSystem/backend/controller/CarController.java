@@ -2,7 +2,6 @@ package com.workForceSystem.backend.controller;
 
 import com.workForceSystem.backend.dto.car.CarRequestDTO;
 import com.workForceSystem.backend.dto.car.CarResponseDTO;
-import com.workForceSystem.backend.service.assembler.AssemblerService;
 import com.workForceSystem.backend.service.car.CarService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

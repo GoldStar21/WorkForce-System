@@ -20,7 +20,7 @@ public class Car {
 
     private String make;
     private String model;
-    private String year; // int bi trebalo
+    private String year;
     private String fuel;
     private String plates;
     private LocalDate tuv;

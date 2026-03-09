@@ -55,7 +55,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         // Dozvoli pristup Login ruti bez autentifikacije
 
-                        .requestMatchers("/api/auth/login","/api/auth/logout").permitAll()
+                        .requestMatchers("/auth/login","/auth/logout").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Sve ostale rute zahtijevaju autentifikaciju
                         .anyRequest().authenticated()

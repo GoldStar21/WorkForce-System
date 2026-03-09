@@ -29,7 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
             throws ServletException, java.io.IOException {
 
         // Skip auth routes (login/register) - OVO JE BITNO
-        if (request.getServletPath().startsWith("/api/auth/")) {
+        if (request.getServletPath().startsWith("/auth")) {
             filterChain.doFilter(request, response);
             return;
         }

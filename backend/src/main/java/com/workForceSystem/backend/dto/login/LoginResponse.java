@@ -1,12 +1,12 @@
-package com.workForceSystem.backend.dto;
+package com.workForceSystem.backend.dto.login;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LoginRequest {
+public class LoginResponse {
 
     private String username;
-    private String password;
+    private String role;
 }

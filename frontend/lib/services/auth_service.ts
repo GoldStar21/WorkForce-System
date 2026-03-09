@@ -1,18 +1,16 @@
-import api from "./api";
+import api_config from "../api_config";
 
 interface LoginResponse {
   username: string;
   role: string;
 }
 
-
-
 // Login function
 export const login = async (
   username: string,
   password: string
 ): Promise<LoginResponse> => {
-  const serverResponse = await api.post<LoginResponse>("/login", {
+  const serverResponse = await api_config.post<LoginResponse>("/auth/login", {
     username,
    password,
   });
@@ -21,5 +19,5 @@ export const login = async (
 
 // Logout function
 export const logout = async (): Promise<void> => {
-  await api.post("/logout");
+  await api_config.post("/auth/logout");
 };

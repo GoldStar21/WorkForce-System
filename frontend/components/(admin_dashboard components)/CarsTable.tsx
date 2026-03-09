@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button";
 
-
 type CarsType = {
   id: number;
   make: string;
@@ -15,7 +14,6 @@ type CarsType = {
 
 type CarsTableProps = {
   cars: CarsType[];
-  setCars: React.Dispatch<React.SetStateAction<CarsType[]>>;
   onEdit: (car: CarsType) => void;
   onDelete: (id: number) => void;
 };
@@ -49,8 +47,16 @@ const CarsTable = ({ cars, onEdit, onDelete }: CarsTableProps) => {
               <td className="carsTable__td">{car.fuel}</td>
 
               <td className="carsTable__buttons">
-                <Button label="EDIT" modifier="button--edit" onClick={() => onEdit(car)}/>
-                <Button label="DELETE" modifier="button--delete"  onClick={() => onDelete(car.id)} />
+                <Button
+                  label="EDIT"
+                  modifier="button--edit"
+                  onClick={() => onEdit(car)}
+                />
+                <Button
+                  label="DELETE"
+                  modifier="button--delete"
+                  onClick={() => onDelete(car.id)}
+                />
               </td>
             </tr>
           ))}
