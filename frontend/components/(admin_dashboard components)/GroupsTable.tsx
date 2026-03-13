@@ -2,6 +2,7 @@
 import { Employee, GroupType } from "@/app/(site)/groups/page";
 import Button from "@/components/Button";
 import { FaListUl } from "react-icons/fa6";
+import { FaCircle } from "react-icons/fa6";
 
 export type GroupProps = {
   groups: GroupType[];
@@ -36,13 +37,13 @@ const GroupTable = ({
         <tbody className="groupTable__tbody">
           {groups.map((group) => (
             <tr className="groupTable__tr" key={group.id}>
-              <td className="employeeTable__td">{group.id}</td>
-              <td className="employeeTable__td">{group.name}</td>
-              <td className="employeeTable__td">{group.country}</td>
-              <td className="employeeTable__td">{group.adress}</td>
-              <td className="employeeTable__td">{group.dateFrom}</td>
-              <td className="employeeTable__td">{group.dateTo}</td>
-              <td className="employeeTable__buttons">
+              <td className="groupTable__td">{group.id}</td>
+              <td className="groupTable__td">{group.name}</td>
+              <td className="groupTable__td">{group.country}</td>
+              <td className="groupTable__td">{group.adress}</td>
+              <td className="groupTable__td">{group.dateFrom}</td>
+              <td className="groupTable__td">{group.dateTo}</td>
+              <td className="groupTable__buttons">
                 <Button
                   label={<FaListUl />}
                   modifier="button--edit"
@@ -51,8 +52,19 @@ const GroupTable = ({
                     setGroupName(group.name);
                   }}
                 />
-                <Button label="EDIT" modifier="button--edit" onClick={() => editGroup(group)}/>
-                <Button label="DELETE" modifier="button--delete" onClick={() => openDeleteDialog(group.id)}/>
+                <Button
+                  label="EDIT"
+                  modifier="button--edit"
+                  onClick={() => editGroup(group)}
+                />
+                <Button
+                  label="DELETE"
+                  modifier="button--delete"
+                  onClick={() => openDeleteDialog(group.id)}
+                />
+                <span className="groupTable__circle">
+                  <FaCircle className={`groupTable__status ${new Date(group.dateTo) < new Date() ? "groupTable__status--expired" : "groupTable__status--active"}`}/>
+                </span>
               </td>
             </tr>
           ))}

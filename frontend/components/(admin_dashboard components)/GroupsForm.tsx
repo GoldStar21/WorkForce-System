@@ -17,6 +17,8 @@ type GroupsFormProps = {
   openCarList: boolean;
   setOpenCarList: React.Dispatch<React.SetStateAction<boolean>>;
   editMode: boolean;
+  cancelEdit: () => void;
+  //refForDropdown: React.RefObject<HTMLFormElement>;
 };
 
 const GroupsForm = ({
@@ -31,17 +33,20 @@ const GroupsForm = ({
   openCarList,
   setOpenCarList,
   editMode,
+  cancelEdit,
+  //refForDropdown
 }: GroupsFormProps) => {
   return (
     <form
       className="groupForm"
+      //ref={refForDropdown}
       onSubmit={(e) => {
         e.preventDefault();
         submitForm();
       }}
     >
       <div className="groupForm__container">
-        <h2 className="groupForm__title">{editMode ? "EDIT GROUP" : "CREATE NEW GROUP"}</h2>
+        <h2 className="groupForm__formTitle">{editMode ? "EDIT GROUP" : "CREATE NEW GROUP"}</h2>
 
         <label htmlFor="" className="groupForm__label">
           SELECT EMPLOYEES
@@ -189,6 +194,9 @@ const GroupsForm = ({
         />
       </div>
       <Button label={editMode ? "Update" : "Save"} type="submit" modifier="button--save" />
+      {editMode && (
+        <Button label="Cancel" type="button" modifier="button--cancel" onClick={cancelEdit} />
+      )}
     </form>
   );
 };

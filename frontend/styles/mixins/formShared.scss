@@ -1,0 +1,303 @@
+/*
+Admin panel consist of 3 pages with exact identical layot. Each component in that files
+have had custom scss. Idea was that all needs to be the same. If we change something in
+one file then we neet do to that in other two. Because od simplicity mixin file is created
+because many things share identical css. So I created mixin file with everything relevant
+in it. Ith devided by coment sections. First section is universal for everything. 
+Others are custom for specific components. So if we want to change font number we do
+that in first section.
+*/
+
+@mixin formBase {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+
+  padding: 2rem;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+
+  height: auto;
+  max-width: 420px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    position: relative;
+  }
+
+  &__formTitle {
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+    font-weight: 700;
+    text-align: center;
+    color: #111827;
+    margin-bottom: 1.5rem;
+  }
+
+  &__label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+  }
+
+  &__input {
+    padding: 0.75rem 0.9rem;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    background-color: #fff;
+    font-size: 0.95rem;
+    cursor: pointer;
+
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:focus {
+      border-color: #2563eb;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+  }
+
+  &__container:hover &__input {
+    border-color: #af9c9c; //#9ca3af
+  }
+  //--
+  &__checkboxLabel,
+  &__radioLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #374151;
+
+    cursor: pointer;
+  }
+
+  &__checkboxLabel input,
+  &__radioLabel input {
+    accent-color: #2563eb;
+    cursor: pointer;
+  }
+
+  //-- employees specific
+  &__list {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 20;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+
+  &__listItem {
+    margin-bottom: 0.4rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    // Ime dodijeli i provjeri za mobilni i tablet
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: #374151;
+
+      input {
+        accent-color: #2563eb;
+        cursor: pointer;
+      }
+    }
+
+    &:hover {
+      background-color: #f3f4f6;
+      border-radius: 6px;
+    }
+  }
+
+  // cars specific
+  &__containerFuel {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  &__fuelLabel {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #374151;
+    text-transform: uppercase;
+    letter-spacing: 0.6x;
+  }
+
+  // groups specifics
+  &__dropdown {
+    position: absolute;
+    top: 100%; // odmah ispod button/input
+    left: 0;
+    width: 95%; // prati širinu containera
+
+    z-index: 10;
+    max-height: 260px;
+    overflow-y: auto;
+
+    background: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+
+    list-style: none;
+    margin: 0; // ← uklanja default margin
+    padding: 4px; // ← mali unutrašnji spacing (NE 40px kao default ul)
+  }
+
+  &__li {
+    padding: 0.5rem 0.75rem;
+    cursor: pointer; // <- da klik vizualno radi
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: #f3f4f6; // <- hover efekt da se vidi koja stavka je izabrana
+    }
+  }
+
+  // TABLET
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 220px;
+
+    &__container {
+      gap: 0.3rem;
+    }
+
+    &__formTitle {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__label {
+      font-size: 0.75rem;
+    }
+
+    &__input {
+      padding: 0.75rem 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    &__checkboxLabel,
+    &__radioLabel {
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    //-- employees specific
+    &__list {
+      padding: 0.5rem;
+      max-height: 160px;
+    }
+
+    &__listItem {
+      margin-bottom: 0.4rem;
+    }
+
+    // cars specific
+    &__containerFuel {
+      gap: 2rem;
+    }
+
+    &__fuelLabel {
+      font-size: 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    &__dropdown {
+      max-height: 260px;
+
+      padding: 4px;
+    }
+
+    &__li {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+
+  @include respondBetween(0, $breakpoint-mobile) {
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 220px;
+
+    &__container {
+      gap: 0.3rem;
+    }
+
+    &__formTitle {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__label {
+      font-size: 0.75rem;
+    }
+
+    &__input {
+      padding: 0.75rem 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    &__checkboxLabel,
+    &__radioLabel {
+      gap: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    //-- employees specific
+    &__list {
+      padding: 0.5rem;
+      max-height: 160px;
+    }
+
+    &__listItem {
+      margin-bottom: 0.4rem;
+    }
+
+    // cars specific
+    &__containerFuel {
+      gap: 2rem;
+    }
+
+    &__fuelLabel {
+      font-size: 0.85rem;
+      font-size: 0.85rem;
+    }
+
+    &__dropdown {
+      max-height: 260px;
+
+      padding: 4px;
+    }
+
+    &__li {
+      padding: 0.5rem 0.75rem;
+    }
+  }
+}

@@ -10,6 +10,10 @@
 // Mixin styles
 @import "./mixins/mixins";
 
+@import "./mixins/formShared.scss";
+
+@import "./mixins/tableShared.scss";
+
 // Styles for login page
 @import "./login/login.scss";
 
@@ -62,7 +66,7 @@
 
 @import "./components/(dashboard components)/groupForm.scss";
 
-@import "./components/(dashboard components)/groups.scss";
+@import "./components/groups.scss";
 
 @import "./components/(dashboard components)/groupsTable.scss";
 

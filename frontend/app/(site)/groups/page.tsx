@@ -58,6 +58,7 @@ const Groups = () => {
     openDeleteDialog,
     closeDeleteDialog,
     deleteConfirmation,
+    cancelEdit,
   } = useGroupHook(groups, setGroups);
 
   return (
@@ -74,6 +75,7 @@ const Groups = () => {
         openCarList={openCarList}
         setOpenCarList={setOpenCarList}
         editMode={editMode}
+        cancelEdit={cancelEdit}
       />
 
       <GroupTable

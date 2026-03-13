@@ -36,6 +36,7 @@ export default function LeafletMap() {
         <Marker key={loc.id} position={[loc.latitude, loc.longitude]}>
           <Popup>
             <h4>PROJECT - {loc.name}</h4>
+            
           </Popup>
         </Marker>
       ))}

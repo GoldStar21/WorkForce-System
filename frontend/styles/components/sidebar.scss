@@ -27,24 +27,9 @@
     padding: 20px 10px;
   }
 
-  /*
-  &__item, &__home {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 15px 28px;
-    cursor: pointer;
-    transition: background-color 0.5s, color 0.2s;
 
-    &:hover {
-      background-color: #1383ba;
-      
-    }
-  }
-    */
 
-  &__item,
-  &__home {
+  &__item {
     position: relative; // ⬅ potrebno za ::after
     display: flex;
     align-items: center;

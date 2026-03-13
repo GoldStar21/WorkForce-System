@@ -1,8 +1,13 @@
 import { Car, Employee } from "@/app/(site)/groups/page";
 import { getAllCars } from "@/lib/services/cars_service";
 import { getAllAssemblers } from "@/lib/services/employees_service";
-import { createNewGroup, getGropList, updateGroup, deleteGroup,} from "@/lib/services/group_service";
-import { useEffect, useState } from "react";
+import {
+  createNewGroup,
+  getGropList,
+  updateGroup,
+  deleteGroup,
+} from "@/lib/services/group_service";
+import { useEffect, useRef, useState } from "react";
 import { GroupType } from "@/app/(site)/groups/page";
 import { getAllGroups } from "@/lib/services/group_service";
 import toast from "react-hot-toast";
@@ -22,10 +27,6 @@ export const useGroupHook = (
   groups: GroupType[],
   setGroups: React.Dispatch<React.SetStateAction<GroupType[]>>,
 ) => {
-  // State for open/close dropdown menu in group form
-  const [openEmpList, setOpenEmpList] = useState(false);
-  const [openCarList, setOpenCarList] = useState(false);
-
   // 1. Form state
   const [form, setFrom] = useState<GroupFormState>({
     name: "",
@@ -43,6 +44,10 @@ export const useGroupHook = (
 
     setFrom((formState) => ({ ...formState, [name]: value }));
   };
+
+  // State for open/close dropdown menu in group form
+  const [openEmpList, setOpenEmpList] = useState(false);
+  const [openCarList, setOpenCarList] = useState(false);
 
   // 3. Event handler for form controll - dropdown
   const dropdownChange = (type: "employee" | "car", id: number) => {
@@ -100,6 +105,8 @@ export const useGroupHook = (
           prev.map((gr) => (gr.id === selectedGroup.id ? groupUpdate : gr)),
         );
         toast.success("Employee successfully updated!", { duration: 4000 });
+        setSelectedGroup(null); // ← dodaj
+        formReset();
       } else {
         const newgroup = await createNewGroup(form);
         toast.success("Group successfully created!", { duration: 4000 });
@@ -178,11 +185,29 @@ export const useGroupHook = (
 
   // DELETE HOOK insert
   const {
-    isConfirmationDialogOpen, 
-    openDeleteDialog, 
-    closeDeleteDialog, 
-    deleteConfirmation
-  } = useSharedHook (deleteGroup, setGroups);
+    isConfirmationDialogOpen,
+    openDeleteDialog,
+    closeDeleteDialog,
+    deleteConfirmation,
+  } = useSharedHook(deleteGroup, setGroups);
+
+  // Funkcija za resetiranje forme
+  const formReset = () => {
+    setFrom({
+      name: "",
+      country: "",
+      adress: "",
+      dateFrom: "",
+      dateTo: "",
+      employeesId: [],
+      carId: null,
+    });
+  };
+
+  const cancelEdit = () => {
+    setSelectedGroup(null);
+    formReset();
+  };
 
   return {
     form,
@@ -201,7 +226,7 @@ export const useGroupHook = (
 
     groups,
     setGroups,
-    
+
     isEmployeeListOpen,
     setIsEmployeeListOpen,
     employeesOfTheGroup,
@@ -215,5 +240,9 @@ export const useGroupHook = (
     openDeleteDialog,
     closeDeleteDialog,
     deleteConfirmation,
+
+    cancelEdit,
+
+    //refForDropdown,
   };
 };

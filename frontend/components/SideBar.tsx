@@ -38,7 +38,7 @@ const SideBar = () => {
   const handleLogout = async () => {
   try {
     await logout(); // poziva tvoj backend
-    router.push("/"); // preusmjeri usera
+    router.replace("/"); // preusmjeri usera
   } catch (error) {
     console.error("Logout failed:", error);
   }
@@ -58,7 +58,7 @@ const SideBar = () => {
 
       <div className="sidebar__menu">
 
- <div className="sidebar__home" onClick={() => router.push("/dashboard")}>
+ <div className="sidebar__item" onClick={() => router.push("/dashboard")}>
           <IoHome className="sidebar__icon" />
           {!isCollapsed && <span className="sidebar__text">HOME</span>}
         </div>
@@ -67,12 +67,7 @@ const SideBar = () => {
           <FaUser className="sidebar__icon" />
           {!isCollapsed && <span className="sidebar__text">Employees</span>}
         </div>
-       {/* 
-        <div className="sidebar__item">
-          <FaUser className="sidebar__icon" />
-          {!isCollapsed && <span className="sidebar__text">Electricians - DEL</span>}
-        </div>
-        */}
+       
         <div className="sidebar__item" onClick={() => router.push("/cars")}>
           <FaCarAlt className="sidebar__icon" />
           {!isCollapsed && <span className="sidebar__text">Cars</span>}

@@ -156,7 +156,7 @@ const EmployeesForm = ({
           type="button"
           modifier="button--cancel"
           onClick={() => {
-            formReset();
+            cancelEdit();
           }}
         />
       )}
