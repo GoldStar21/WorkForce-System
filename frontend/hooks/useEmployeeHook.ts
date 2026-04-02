@@ -131,7 +131,7 @@ export const useEmployeeHook = (
     });
   };
 
-  // DELETE HOOK insert
+  // DELETE HOOK insert and form insert
   const {
     isConfirmationDialogOpen,
     openDeleteDialog,
@@ -163,5 +163,6 @@ export const useEmployeeHook = (
     deleteConfirmation,
     cancelEdit,
     setSelectedEmployee,
+
   };
 };

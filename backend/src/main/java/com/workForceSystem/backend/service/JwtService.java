@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -26,10 +27,15 @@ public class JwtService {
     }
 
     // --- 1. Kreiranje Tokena ---
-    public String createToken(User user) {
+    public String createToken(UserDetails userDetails) {
+        String role = userDetails.getAuthorities().stream()
+                .findFirst()
+                .map(a -> a.getAuthority())
+                .orElse("UNKNOWN");
+
         return Jwts.builder()
-                .claim("username", user.getUsername())
-                .claim("role", user.getRole()) // Pretpostavljajući da User ima getRole()
+                .claim("username", userDetails.getUsername())
+                .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(getSigningKey())

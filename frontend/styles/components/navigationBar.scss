@@ -15,6 +15,7 @@
     align-items: center;
     width: 100%;
     overflow: visible;
+    padding: 0 1.5rem;
   }
 
   &__leftSide {
@@ -30,12 +31,12 @@
   }
 
   &__icon {
-    font-size: 1.5rem;
+    font-size: 1.9rem;
     color: #fafafa;
   }
 
   &__title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   &__rightSide {
@@ -49,128 +50,177 @@
     font-size: 1.2rem;
   }
 
-  &__hamburgerIcon {
-    display: none;
-    font-size: 2rem;
+  &__notificationWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
     cursor: pointer;
   }
 
-  &__mobileSideMenu {
-    position: fixed;
-    top: 60px;
-    right: -80px;
-    width: 80px;
-    height: calc(100vh - 60px - 40px);
-    background: #fff;
-    transition: right 0.5s ease;
+  &__notify {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+
+    width: 320px;
+
+    background: white;
+
+    border-radius: 8px;
+
+    border: 1px solid #e5e7eb;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    padding: 0.5rem 0;
+
+    z-index: 999;
+  }
+
+  &__notifyItem {
     display: flex;
     flex-direction: column;
-    padding: 3rem 0;
-    gap: 3rem;
-    z-index: 999;
-    box-sizing: border-box;
-    box-shadow: none;
-    align-items: center;
 
-    &--open {
-      right: 0;
-      box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+    gap: 4px;
+
+    padding: 0.75rem 1rem;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background: #f9fafb;
     }
   }
 
-  &__notificationWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
+  &__notifyTitle {
+    font-size: 0.9rem;
+    font-weight: 500;
 
-&__notify {
-  position: absolute;
-  top: calc(100% - 10px);
-  right: 0;
-  min-width: 320px;
-  max-width: 500px;
-
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  padding: 0.5rem 1rem;
-  z-index: 999;
-}
-
-&__notifyItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #f3f4f6;
-  cursor: default;
-
-  &:last-child {
-    border-bottom: none;
+    color: #111827;
   }
 
-  &:hover {
-    background-color: #f9fafb;
+  &__notifyDate {
+    font-size: 0.8rem;
+
+    color: #6b7280;
   }
-}
 
-&__notifyTitle {
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: #111827;
-  white-space: nowrap;
-}
+  &__badge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    background-color: #dc2626;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+  }
 
-&__badge {
-  position: absolute;
-  top: -4px;
-  right: -6px;
-  background-color: #dc2626;
-  color: white;
-  font-size: 0.8rem;
-  font-weight: 700;
-  border-radius: 50%;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-
-
-  @include respondBetween(0, $breakpoint-mobile) {
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
     &__leftSide {
-      gap: 0.8rem;
+      gap: 1rem;
     }
 
     &__logo {
-      font-size: 2.4rem;
+      font-size: 2.5rem;
     }
 
     &__icon {
       font-size: 1.7rem;
-      color: #232323;
+      color: #fafafa;
     }
 
     &__title {
-      font-size: 0.9rem;
+      font-size: 1.5rem;
     }
 
     &__rightSide {
-      display: none;
+      gap: 1rem;
     }
 
     &__username {
-      color: #0a0a0a;
-      font-size: 1.2rem;
+      color: #fafafa;
+      font-size: 1.25rem;
     }
 
-    &__hamburgerIcon {
-      display: block;
+    &__notify {
+      width: 220px;
+    }
+
+    &__notifyTitle {
+      font-size: 1rem;
+    }
+
+    &__notifyDate {
+      font-size: 0.9rem;
+
+      color: #6b7280;
+    }
+
+    &__badge {
+      font-size: 0.9rem;
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  @include respondBetween(0, $breakpoint-mobile) {
+    &__leftSide {
+      gap: 0.5rem;
+    }
+
+    &__logo {
+      font-size: 2.5rem;
+    }
+
+    &__icon {
+      font-size: 1.3rem;
+      color: #fafafa;
+    }
+
+    &__title {
+      font-size: 1rem;
+    }
+
+    &__rightSide {
+      gap: 1rem;
+    }
+
+    &__username {
+      color: #fafafa;
+      font-size: 1rem;
+    }
+
+    &__notify {
+      top: calc(100% + 10px);
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%);
+      width: 220px;
+    }
+
+    &__notifyTitle {
+      font-size: 1rem;
+    }
+
+    &__notifyDate {
+      font-size: 0.9rem;
+
+      color: #6b7280;
+    }
+
+    &__badge {
+      font-size: 0.9rem;
+      width: 16px;
+      height: 16px;
     }
   }
 }

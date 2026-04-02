@@ -1,9 +1,7 @@
 "use client";
 import { MdConstruction } from "react-icons/md";
 import { IoNotifications } from "react-icons/io5";
-import { LuMenu } from "react-icons/lu";
 import { FaUser } from "react-icons/fa";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useNotificationHook } from "@/hooks/useNotificationHook";
 
@@ -12,7 +10,6 @@ interface NavbarProps {
 }
 
 const NavigationBar = ({ username }: NavbarProps) => {
-  const [mobileOpen, setMobileOpen] = useState(false);
   const router = useRouter();
 
   const { cars, isOpenNotification, setOpenNotification } =
@@ -29,11 +26,6 @@ const NavigationBar = ({ username }: NavbarProps) => {
           <h1 className="header__title">WorkForce SYSTEM</h1>
         </div>
 
-
-
-
-
-
         <div className="header__rightSide">
           <div
             className="header__notificationWrapper"
@@ -47,40 +39,26 @@ const NavigationBar = ({ username }: NavbarProps) => {
             {isOpenNotification && (
               <ul className="header__notify">
                 {cars.map((car) => (
-                  <ul key={car.id} className="header__notifyItem">
-                    <li className="header__notifyTitle">
-                      TuV EXPIRES : "{car.make} {car.model}" on {new Date(car.tuv).toLocaleDateString("en-GB").replace(/\//g,".")}
-                    </li>
-                  </ul>
+                  <li key={car.id} className="header__notifyItem">
+                    <div className="header__notifyTitle">
+                      {car.make} {car.model}
+                    </div>
+
+                    <div className="header__notifyDate">
+                      TUV expires:{" "}
+                      {new Date(car.tuv)
+                        .toLocaleDateString("en-GB")
+                        .replace(/\//g, ".")}
+                    </div>
+                  </li>
                 ))}
               </ul>
             )}
           </div>
 
-
-
-
-
-
-
           <FaUser className="header__icon" />
           <h2 className="header__username">{username ?? "Guest"}</h2>
         </div>
-
-        <LuMenu
-          className="header__hamburgerIcon"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        />
-      </div>
-
-      {/* MOBILE MENU */}
-      <div
-        className={`header__mobileSideMenu ${
-          mobileOpen ? "header__mobileSideMenu--open" : ""
-        }`}
-      >
-        <FaUser className="header__icon" />
-        <IoNotifications className="header__icon" />
       </div>
     </header>
   );

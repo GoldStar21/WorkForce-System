@@ -4,6 +4,10 @@ interface LoginResponse {
   username: string;
   role: string;
 }
+interface setPasswordRequest {
+  token: string | null;
+  password: string;
+}
 
 // Login function
 export const login = async (
@@ -20,4 +24,9 @@ export const login = async (
 // Logout function
 export const logout = async (): Promise<void> => {
   await api_config.post("/auth/logout");
+};
+
+// Register
+export const setPasswordService = async (data: setPasswordRequest): Promise<void> => {
+  await api_config.post("/employees/set-password", data);
 };

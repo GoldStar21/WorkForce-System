@@ -1,7 +1,7 @@
 "use client"
 
 import Button from "@/components/Button";
-import { useCarHook } from "@/hooks/useCarHook";
+import { IoIosCloseCircle } from "react-icons/io";
 import { CarForm } from "@/hooks/useCarHook";
 
 type CarsType = {
@@ -21,6 +21,7 @@ type CarsFormProps = {
   submitForm: () => void;
   editMode: boolean;
   cancelEdit: () => void;
+  onClose: () => void;
 };
 
 
@@ -31,6 +32,7 @@ const CarsForm = ({
   submitForm,
   editMode,
   cancelEdit,
+  onClose,
 }: CarsFormProps) => {
   return (
     <form
@@ -40,6 +42,11 @@ const CarsForm = ({
         submitForm();
       }}
     >
+      <Button
+        label={<IoIosCloseCircle />}
+        modifier="button--closeModal"
+        onClick={onClose}
+      />
       <div className="carsForm__container">
         <h2 className="carsForm__formTitle">{editMode ? "UPDATE CAR" : "CREATE NEW CAR"}</h2>
         <label htmlFor="make" className="carsForm__label">

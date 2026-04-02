@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import Button from "./Button";
+import Button from "../Button";
 import { login } from "@/lib/services/auth_service";
 
 const LoginForm = () => {
@@ -12,15 +12,20 @@ const LoginForm = () => {
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await login(username, password); // backend postavlja cookie
-      router.push("/dashboard");       // redirect nakon login-a
-    } catch (err) {
-      console.error(err);
-      alert("Login failed");
+  e.preventDefault();
+  try {
+    const response = await login(username, password);
+    
+    if (response.role === "ADMIN") {
+      router.push("/dashboard");
+    } else {
+      router.push("/employee-dashboard");
     }
-  };
+  } catch (err) {
+    console.error(err);
+    alert("Login failed");
+  }
+};
   return (
     <form className="form" autoComplete="off" onSubmit={handleSubmit}>
       <div className="form__group">

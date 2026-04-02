@@ -22,6 +22,8 @@ that in first section.
   height: auto;
   max-width: 420px;
 
+  position: relative;
+
   &__container {
     display: flex;
     flex-direction: column;
@@ -180,7 +182,7 @@ that in first section.
     }
   }
 
-  // TABLET
+  // TABLET DOBRO PROVJERIT I MOZDA ISKLJUCIT
   @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
     gap: 1.5rem;
     padding: 1.5rem;
@@ -242,9 +244,10 @@ that in first section.
   }
 
   @include respondBetween(0, $breakpoint-mobile) {
+    max-width: 220px;
+    overflow-y: auto;
     gap: 1.5rem;
     padding: 1.5rem;
-    max-width: 220px;
 
     &__container {
       gap: 0.3rem;

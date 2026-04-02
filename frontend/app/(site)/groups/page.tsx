@@ -36,7 +36,10 @@ const Groups = () => {
 
   const [groupName, setGroupName] = useState<String>("");
 
-  // Calling HOOK in parent
+  // State for form
+  const [isFormOpen, setIsFormOpen] = useState(false);
+
+  // Calling HOOK
   const {
     form,
     inputChange,
@@ -63,20 +66,29 @@ const Groups = () => {
 
   return (
     <div className="groups">
-      <GroupsForm
-        form={form}
-        inputChange={inputChange}
-        dropdownChange={dropdownChange}
-        submitForm={submitForm}
-        employees={employees}
-        cars={cars}
-        openEmpList={openEmpList}
-        setOpenEmpList={setOpenEmpList}
-        openCarList={openCarList}
-        setOpenCarList={setOpenCarList}
-        editMode={editMode}
-        cancelEdit={cancelEdit}
+      <Button
+        label=" + Add employee"
+        modifier="button--addEmployee"
+        onClick={() => setIsFormOpen(true)}
       />
+
+      <div className={`groups__formModal ${isFormOpen ? "groups__formModal--open" : ""}`}>
+        <GroupsForm
+          form={form}
+          inputChange={inputChange}
+          dropdownChange={dropdownChange}
+          submitForm={submitForm}
+          employees={employees}
+          cars={cars}
+          openEmpList={openEmpList}
+          setOpenEmpList={setOpenEmpList}
+          openCarList={openCarList}
+          setOpenCarList={setOpenCarList}
+          editMode={editMode}
+          cancelEdit={cancelEdit}
+          onClose={() => setIsFormOpen(false)}
+        />
+      </div>
 
       <GroupTable
         groups={groups}

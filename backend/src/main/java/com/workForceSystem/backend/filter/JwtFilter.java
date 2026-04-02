@@ -23,20 +23,18 @@ public class JwtFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
-            throws ServletException, java.io.IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,  FilterChain filterChain) throws ServletException, java.io.IOException {
 
-        // Skip auth routes (login/register) - OVO JE BITNO
-        if (request.getServletPath().startsWith("/auth")) {
+        // 1. Skip auth routes (login/register)
+        if (request.getServletPath().startsWith("/auth") ||
+                request.getServletPath().equals("/employees/set-password")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         String token = null;
 
-        // Čitanje JWT iz HttpOnly cookie - OVO JE KLJUČNO
+        // Čitanje JWT iz HttpOnly cookie
         if (request.getCookies() != null) {
             for (Cookie cookie : request.getCookies()) {
                 if ("jwt".equals(cookie.getName())) {

@@ -5,6 +5,7 @@ import EmployeesTable from "@/components/(admin_dashboard components)/EmployeesT
 import { useState } from "react";
 import { useEmployeeHook } from "@/hooks/useEmployeeHook";
 import ConfirmationDialog from "@/components/ConfirmationDialog";
+import Button from "@/components/Button";
 
 // TIP ZAPOSLENIKA KAKAV POSTOJI U SISTEMU / BAZI
 export type EmployeeType = {
@@ -19,6 +20,9 @@ export type EmployeeType = {
 const Assemblers = () => {
   // State for instant update in the table when new employee is saved
   const [employees, setEmployees] = useState<EmployeeType[]>([]);
+
+  // State for form
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const {
     form,
@@ -41,20 +45,34 @@ const Assemblers = () => {
   } = useEmployeeHook(setEmployees);
 
   return (
+     // ADD EMPLOYEE DUGME SLOZI PO SVOM CEJFU
     <div className="assemblers">
-      <EmployeesForm
-        form={form}
-        inputChange={inputChange}
-        radiobuttonChange={radiobuttonChange}
-        submitForm={submitForm}
-        checkboxControl={checkboxControl}
-        listOpen={listOpen}
-        setListOpen={setListOpen}
-        LANGUAGE_OPTIONS={LANGUAGE_OPTIONS}
-        editMode={editMode}
-        formReset={formReset}
-        cancelEdit={cancelEdit}
+
+      <Button
+        label=" + Add employee"
+        modifier="button--addEmployee"
+        onClick={() => setIsFormOpen(true)}
       />
+
+      <div
+        className={`assemblers__formModal ${isFormOpen ? "assemblers__formModal--open" : ""}`}
+      >
+        <EmployeesForm
+          form={form}
+          inputChange={inputChange}
+          radiobuttonChange={radiobuttonChange}
+          submitForm={submitForm}
+          checkboxControl={checkboxControl}
+          listOpen={listOpen}
+          setListOpen={setListOpen}
+          LANGUAGE_OPTIONS={LANGUAGE_OPTIONS}
+          editMode={editMode}
+          formReset={formReset}
+          cancelEdit={cancelEdit}
+          onClose={() => setIsFormOpen(false)}
+        />
+      </div>
+
       <EmployeesTable
         employees={employees}
         openDeleteDialog={openDeleteDialog}

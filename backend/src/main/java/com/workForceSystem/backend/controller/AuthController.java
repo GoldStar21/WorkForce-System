@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -32,38 +33,37 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-
-        // User authentication
-        // Koristenje auth managera kojem je potreban customUserDetailsService
-
         try {
-            // User Authentication
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
 
-            // Treba vidjet UserDetailsService ima li veze sa ovim
-            User user = (User) authentication.getPrincipal();
+            // UserDetails umjesto User — radi za oba (admin i radnik)
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-            // JWT token create
-            String token = jwtService.createToken(user);
+            // JWT token
+            String token = jwtService.createToken(userDetails);
 
-            // 4. Kreiranje HttpOnly kolačića - SRŽ IMPLEMENTACIJE
             ResponseCookie responseCookie = ResponseCookie.from("jwt", token)
                     .httpOnly(true)
                     .secure(false)
                     .path("/")
-                    .maxAge(60*60)
+                    .maxAge(60 * 60)
                     .sameSite("Lax")
                     .build();
 
-            // 5. Dodavanje kolačića u response header
             response.addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
 
-            return ResponseEntity.ok(new LoginResponse(user.getUsername(), user.getRole()));
+            // Dohvati rolu iz authorities
+            String role = userDetails.getAuthorities().stream()
+                    .findFirst()
+                    .map(a -> a.getAuthority())
+                    .orElse("UNKNOWN");
 
+            return ResponseEntity.ok(new LoginResponse(userDetails.getUsername(), role));
 
-        }catch (AuthenticationException e) {
+        } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Invalid credentials");
-
         }
     }
 

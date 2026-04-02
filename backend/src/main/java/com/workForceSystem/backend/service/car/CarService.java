@@ -32,10 +32,14 @@ public class CarService {
     }
 
     public List<CarResponseDTO> getAllCars() {
+        /*
         return carRepository.findAll()
                 .stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
+
+         */
+        return carRepository.findBySoldFalse().stream().map(this::convertToDTO).collect(Collectors.toList());
 
     }
 
@@ -70,9 +74,9 @@ public class CarService {
 
     public void deleteCar(Long id) {
 
-        if(!carRepository.existsById(id)) {
-            throw new RuntimeException("Assembler not found");
-        }
-        carRepository.deleteById(id);
+        Car car = carRepository.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));
+        car.setSold(true);
+
+        carRepository.save(car);
     }
 }

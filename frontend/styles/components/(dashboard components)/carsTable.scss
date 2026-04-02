@@ -2,6 +2,64 @@
 
 .carsTable {
   @include tableBase;
+
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+    &__table {
+      min-width: unset;
+      font-size: 0.8rem;
+    }
+
+    &__th {
+      padding: 0.4rem 0.2rem;
+      font-size: 0.7rem;
+    }
+
+    &__td {
+      padding: 0.3rem 0.2rem;
+      max-width: 70px;
+      font-size: 0.7rem;
+    }
+
+    &__buttons {
+      flex-direction: row;
+      gap: 0.2rem;
+      padding: 0.2rem;
+    }
+  }
+
+  @include respondBetween(0, $breakpoint-mobile) {
+    &__table {
+      min-width: unset;
+      font-size: 0.75rem;
+    }
+
+    &__th {
+      padding: 0.4rem 0.2rem;
+      font-size: 0.7rem;
+    }
+
+    &__td {
+      padding: 0.3rem 0.2rem;
+      max-width: 70px;
+      font-size: 0.7rem;
+    }
+
+    &__buttons {
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.2rem;
+    }
+    &__th:nth-child(7),
+    &__th:nth-child(6),
+    &__th:nth-child(5),
+    &__th:nth-child(4),
+    &__th:nth-child(1),
+    &__td:nth-child(7),
+    &__td:nth-child(6),
+    &__td:nth-child(5),
+    &__td:nth-child(4),
+    &__td:nth-child(1) {
+      display: none;
+    }
+  }
 }
-
-

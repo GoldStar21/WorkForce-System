@@ -3,14 +3,17 @@ package com.workForceSystem.backend.service.assembler;
 import com.workForceSystem.backend.dto.assembler.AssemblerRequestDTO;
 import com.workForceSystem.backend.dto.assembler.AssemblerResponseDTO;
 import com.workForceSystem.backend.model.employee.Assembler;
+import com.workForceSystem.backend.model.employee.AssemblerRole;
 import com.workForceSystem.backend.model.employee.Language;
 import com.workForceSystem.backend.repository.AssemblerRepository;
-import com.workForceSystem.backend.repository.LanguageRepository;
-import com.workForceSystem.backend.repository.car.CarRepository;
+import com.workForceSystem.backend.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,39 +21,35 @@ import java.util.stream.Collectors;
 public class AssemblerService {
 
     private final AssemblerRepository assemblerRepository;
-    private final LanguageRepository languageRepository;
-    private final CarRepository carRepository;
+    private final EmailService emailService;
+    private final PasswordEncoder passwordEncoder;
 
-    // Save new Assembler/Electrician
+    // Save new Employee
     public AssemblerResponseDTO saveNewAssembler(AssemblerRequestDTO requestDto) {
 
         Assembler assembler = new Assembler();
+
         assembler.setName(requestDto.getName());
         assembler.setSurname(requestDto.getSurname());
         assembler.setEmail(requestDto.getEmail());
         assembler.setJob(requestDto.getJob());
 
-        List<Language> languages = requestDto.getLanguages().stream()
-                        .map(langName ->  {
-                            Language language = new Language();
-                            language.setLanguage(langName);
-                            language.setAssembler(assembler);
-                            return language;
-                        })
-                                .toList();
+        // Token
+        String token = UUID.randomUUID().toString();
+        assembler.setUsername(requestDto.getName().toLowerCase() + "." + requestDto.getSurname().toLowerCase());
+        assembler.setInviteToken(token);
+        assembler.setTokenExpiry(LocalDateTime.now().plusHours(24));
+        assembler.setAccountActivated(false);
+        assembler.setRole(AssemblerRole.EMPLOYEE);
+        // END
 
-        assembler.setLanguages(languages);
+        assembler.setLanguages(createLanguages(requestDto, assembler));
+
+        // --------------------------
         Assembler savedAssembler = assemblerRepository.save(assembler);
+        emailService.sendInviteEmail(savedAssembler.getEmail(), token);
 
-        AssemblerResponseDTO responseDto = new AssemblerResponseDTO();
-        responseDto.setId(savedAssembler.getId());
-        responseDto.setName(savedAssembler.getName());
-        responseDto.setSurname(savedAssembler.getSurname());
-        responseDto.setEmail(savedAssembler.getEmail());
-        responseDto.setJob(savedAssembler.getJob());
-        responseDto.setLanguages(savedAssembler.getLanguages().stream().map(Language::getLanguage).toList());
-
-        return responseDto;
+        return convertEntityToDTO(savedAssembler);
     }
 
     // Get Assemblers
@@ -62,6 +61,7 @@ public class AssemblerService {
 
     }
 
+    // Centralni mapper Entity → DTO
     private AssemblerResponseDTO convertEntityToDTO(Assembler assembler) {
 
         AssemblerResponseDTO dto = new AssemblerResponseDTO();
@@ -74,9 +74,30 @@ public class AssemblerService {
         return dto;
     }
 
+    // Helper metoda za languages
+    private List<Language> createLanguages(AssemblerRequestDTO requestDto,
+                                           Assembler assembler) {
+
+        return requestDto.getLanguages()
+                .stream()
+                .map(langName -> {
+
+                    Language language = new Language();
+
+                    language.setLanguage(langName);
+
+                    // bitno zbog JPA relationship
+                    language.setAssembler(assembler);
+
+                    return language;
+
+                })
+                .toList();
+    }
+
     public void deleteAssembler(Long id) {
 
-        if(!assemblerRepository.existsById(id)) {
+        if (!assemblerRepository.existsById(id)) {
             throw new RuntimeException("Assembler not found");
         }
         assemblerRepository.deleteById(id);
@@ -95,28 +116,30 @@ public class AssemblerService {
         // 1️⃣ Obriši stare jezike (orphanRemoval će ih maknuti iz baze)
         assembler.getLanguages().clear();
 
-        // 2️⃣ Dodaj nove
-        List<Language> languages = requestDto.getLanguages().stream()
-                .map(langName -> {
-                    Language language = new Language();
-                    language.setLanguage(langName);
-                    language.setAssembler(assembler);
-                    return language;
-                })
-                .toList();
-
-        
-
-
-
-        assembler.getLanguages().addAll(languages);
-
-
+        // 2️⃣ Dodaj nove (reuse helper)
+        assembler.getLanguages().addAll(
+                createLanguages(requestDto, assembler)
+        );
 
 
         Assembler savedAssembler = assemblerRepository.save(assembler);
         return convertEntityToDTO(savedAssembler);
 
 
+    }
+
+    public void setPassword(String token, String password) {
+        Assembler assembler = assemblerRepository.findByInviteToken(token)
+                .orElseThrow(() -> new RuntimeException("Invalid token"));
+
+        if (assembler.getTokenExpiry().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Token expired");
+        }
+
+        assembler.setPassword(passwordEncoder.encode(password));
+        assembler.setInviteToken(null);
+        assembler.setTokenExpiry(null);
+        assembler.setAccountActivated(true);
+        assemblerRepository.save(assembler);
     }
 }

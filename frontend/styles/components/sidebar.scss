@@ -1,8 +1,6 @@
 .sidebar {
   background: #e8f1f5;
-  //min-width: 10%;
-  //max-width: 20%;
-  width: 200px;
+  width: 250px;
   padding-top: 20px;
   display: flex;
   flex-direction: column;
@@ -27,10 +25,8 @@
     padding: 20px 10px;
   }
 
-
-
   &__item {
-    position: relative; // ⬅ potrebno za ::after
+    position: relative;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -43,7 +39,7 @@
     &::after {
       content: "";
       position: absolute;
-      bottom: 6px; // udaljenost linije od dna
+      bottom: 6px;
       left: 50%;
       width: 0;
       height: 2px;
@@ -53,17 +49,17 @@
     }
 
     &:hover::after {
-      width: 80%; // koliko se linija raširi
+      width: 80%;
     }
   }
 
   &__icon {
-    font-size: 24px;
+    font-size: 1.8rem;
     color: #333;
   }
 
   &__text {
-    font-size: 18px;
+    font-size: 1.35rem;
     font-weight: 500;
     letter-spacing: 0.5px;
   }
@@ -72,11 +68,17 @@
     padding: 20px 28px;
   }
 
-  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
-    width: 180px;
+  &__logoutIcon {
+    font-size: 2rem;
+  }
 
-    &--collapsed {
-      width: 60px;
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+    width: 35px;
+
+    &__text {
+      display: none;
+
+      font-size: 1.2rem;
     }
 
     &__openClose {
@@ -86,7 +88,7 @@
 
     &__arrows {
       padding: 15px 8px;
-      font-size: 23px;
+      font-size: 1.75rem;
       color: #333;
     }
 
@@ -99,24 +101,32 @@
     }
 
     &__icon {
-      font-size: 23px;
-    }
-
-    &__text {
-      font-size: 16px;
+      font-size: 1.5rem;
     }
 
     &__logout {
       padding: 20px 8px;
+    }
+
+    &__logoutIcon {
+      font-size: 1.75rem;
+    }
+
+    &--open {
+      width: 170px;
+
+      .sidebar__text {
+        display: block;
+      }
     }
   }
-  //Visak je ovo
 
   @include respondBetween(0, $breakpoint-mobile) {
-    width: 180px;
+    width: 35px;
 
-    &--collapsed {
-      width: 35px;
+    &__text {
+      display: none;
+      font-size: 0.8rem;
     }
 
     &__openClose {
@@ -126,7 +136,7 @@
 
     &__arrows {
       padding: 15px 8px;
-      font-size: 23px;
+      font-size: 1.5rem;
       color: #333;
     }
 
@@ -139,15 +149,23 @@
     }
 
     &__icon {
-      font-size: 23px;
-    }
-
-    &__text {
-      font-size: 16px;
+      font-size: 1.25rem;
     }
 
     &__logout {
       padding: 20px 8px;
+    }
+
+    &__logoutIcon {
+      font-size: 1.5rem;
+    }
+
+    &--open {
+      width: 130px;
+
+      .sidebar__text {
+        display: block;
+      }
     }
   }
 }

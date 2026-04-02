@@ -1,10 +1,12 @@
 .worldMapContainer {
-  height: 70vh;
+  height: 65vh;
   border-radius: 10px;
   position: relative;
 
   @include respondBetween(0, $breakpoint-mobile) {
-    height: 70dvh;
-    border: 1px solid #131212;
+    height: 55dvh;
+    //border: 1px solid #131212;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    //border: 1px solid rgba(0, 0, 0, 0.06);
   }
 }

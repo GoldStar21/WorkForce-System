@@ -2,6 +2,7 @@
 import Button from "@/components/Button";
 import { EmployeeForm } from "@/hooks/useEmployeeHook";
 import React from "react";
+import { IoIosCloseCircle } from "react-icons/io";
 
 type EmployeesFormProps = {
   form: EmployeeForm;
@@ -15,7 +16,10 @@ type EmployeesFormProps = {
   editMode: boolean;
   formReset: () => void;
   cancelEdit: () => void;
+  onClose: () => void;
 };
+
+
 
 const EmployeesForm = ({
   form,
@@ -29,6 +33,7 @@ const EmployeesForm = ({
   editMode,
   formReset,
   cancelEdit,
+  onClose,
 }: EmployeesFormProps) => {
   return (
     <form
@@ -38,6 +43,11 @@ const EmployeesForm = ({
         submitForm();
       }}
     >
+      <Button
+        label={<IoIosCloseCircle />}
+        modifier="button--closeModal"
+        onClick={onClose}
+      />
       <div className="assemblersForm__container">
         <h2 className="assemblersForm__formTitle">
           {editMode ? "UPDATE EMPLOYEE" : "CREATE NEW EMPLOYEE"}

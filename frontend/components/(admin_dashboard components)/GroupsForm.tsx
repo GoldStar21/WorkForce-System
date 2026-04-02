@@ -4,6 +4,7 @@ import Button from "../Button";
 import { Employee, Car } from "@/app/(site)/groups/page";
 import { FaAnglesDown } from "react-icons/fa6";
 import { GroupFormState } from "@/hooks/useGroupHook";
+import { IoIosCloseCircle } from "react-icons/io";
 
 type GroupsFormProps = {
   form: GroupFormState;
@@ -18,7 +19,7 @@ type GroupsFormProps = {
   setOpenCarList: React.Dispatch<React.SetStateAction<boolean>>;
   editMode: boolean;
   cancelEdit: () => void;
-  //refForDropdown: React.RefObject<HTMLFormElement>;
+  onClose: () => void;
 };
 
 const GroupsForm = ({
@@ -34,19 +35,25 @@ const GroupsForm = ({
   setOpenCarList,
   editMode,
   cancelEdit,
-  //refForDropdown
+  onClose,
 }: GroupsFormProps) => {
   return (
     <form
       className="groupForm"
-      //ref={refForDropdown}
       onSubmit={(e) => {
         e.preventDefault();
         submitForm();
       }}
     >
+      <Button
+        label={<IoIosCloseCircle />}
+        modifier="button--closeModal"
+        onClick={onClose}
+      />
       <div className="groupForm__container">
-        <h2 className="groupForm__formTitle">{editMode ? "EDIT GROUP" : "CREATE NEW GROUP"}</h2>
+        <h2 className="groupForm__formTitle">
+          {editMode ? "EDIT GROUP" : "CREATE NEW GROUP"}
+        </h2>
 
         <label htmlFor="" className="groupForm__label">
           SELECT EMPLOYEES
@@ -101,7 +108,6 @@ const GroupsForm = ({
                     onChange={() => dropdownChange("car", vehicle.id)}
                   />
                 </label>
-
                 {vehicle.make} {vehicle.model}
               </li>
             ))}
@@ -193,9 +199,18 @@ const GroupsForm = ({
           required
         />
       </div>
-      <Button label={editMode ? "Update" : "Save"} type="submit" modifier="button--save" />
+      <Button
+        label={editMode ? "Update" : "Save"}
+        type="submit"
+        modifier="button--save"
+      />
       {editMode && (
-        <Button label="Cancel" type="button" modifier="button--cancel" onClick={cancelEdit} />
+        <Button
+          label="Cancel"
+          type="button"
+          modifier="button--cancel"
+          onClick={cancelEdit}
+        />
       )}
     </form>
   );

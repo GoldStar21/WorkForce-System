@@ -87,4 +87,138 @@
       color: red;
     }
   }
+
+  // TABLET
+  @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    max-height: calc(100vh - 9.25rem);
+
+    &__table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+      //min-width: 900px; // sprječava lomljenje kolona
+    }
+
+    &__thead {
+      background-color: #f3f4f6;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    &__th {
+      padding: 0.75rem 0.5rem;
+      text-align: center;
+      font-weight: 600;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+      white-space: nowrap;
+    }
+
+    &__td {
+      padding: 0.6rem 0.5rem;
+      text-align: center;
+      color: #444;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+      letter-spacing: 0.6px;
+
+      max-width: 160px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    &__tr {
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: #f9fafb;
+      }
+    }
+
+    /* Zebra effect (čitljivost) */
+    &__tbody &__tr:nth-child(even) {
+      background-color: #fcfcfc;
+    }
+
+    &__buttons {
+      padding: 0.2rem 0;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+      background-color: inherit;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    // GROUP SPECIAL REQUEST
+
+    &__circle {
+      display: flex;
+      align-items: center;
+    }
+
+    &__status {
+      font-size: 10px;
+      margin-left: 1rem;
+
+      &--active {
+        color: green;
+      }
+
+      &--expired {
+        color: red;
+      }
+    }
+  }
+
+  // MOBILE
+  
+  @include respondBetween(0, $breakpoint-mobile) {
+    &__circle {
+      display: none;
+    }
+
+    /*
+    &__table {
+      min-width: unset; // ← makni min-width potpuno
+      font-size: 0.75rem;
+    }
+
+    &__th {
+      padding: 0.4rem 0.2rem;
+      font-size: 0.7rem;
+    }
+
+    &__td {
+      padding: 0.3rem 0.2rem;
+      max-width: 70px;
+      font-size: 0.7rem;
+    }
+
+    &__buttons {
+      flex-direction: column;
+      gap: 0.2rem;
+      padding: 0.2rem;
+    }
+    &__th:nth-child(6),
+    &__th:nth-child(4),
+    &__th:nth-child(5),
+    &__td:nth-child(6),
+    &__td:nth-child(4),
+    &__td:nth-child(5) {
+      display: none; // sakrij npr. email kolonu Svaki fajl posebno da sakrije
+    }
+      */
+  }
+
+
 }

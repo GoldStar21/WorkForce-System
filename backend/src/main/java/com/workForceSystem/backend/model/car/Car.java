@@ -24,4 +24,7 @@ public class Car {
     private String fuel;
     private String plates;
     private LocalDate tuv;
+
+    // Invisivible field = deleted
+    private boolean sold = false;
 }

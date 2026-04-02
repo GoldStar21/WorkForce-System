@@ -2,6 +2,7 @@ package com.workForceSystem.backend.controller;
 
 import com.workForceSystem.backend.dto.assembler.AssemblerRequestDTO;
 import com.workForceSystem.backend.dto.assembler.AssemblerResponseDTO;
+import com.workForceSystem.backend.dto.assembler.SetPasswordRequest;
 import com.workForceSystem.backend.service.assembler.AssemblerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,13 @@ public class AssemblerController {
     public ResponseEntity<?> deleteAssembler(@PathVariable Long id) {
         assemblerService.deleteAssembler(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // Password after clicking link
+    @PostMapping("/set-password")
+    public ResponseEntity<?> setPassword(@RequestBody SetPasswordRequest request) {
+        assemblerService.setPassword(request.getToken(), request.getPassword());
+        return ResponseEntity.ok("Password set successfully.");
     }
 
 

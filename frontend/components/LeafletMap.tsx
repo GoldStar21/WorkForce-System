@@ -19,6 +19,7 @@ export default function LeafletMap() {
 
   return (
     <MapContainer
+    attributionControl={false}
       //Leefleet container - treba napraviti scss
       // Border radius inherit napraviti i tjt
       className="mapRadius"
