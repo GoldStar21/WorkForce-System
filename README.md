@@ -10,9 +10,9 @@ WorkForce SYSTEM is a management platform for tracking employees, work hours, co
 - Role based authorization
 - Admin dashboard
 - Employee dashboard
-- Maps showing real-time employee locations
+- Maps showing real-time employee (teams) locations
 - Notifications for vehicle registration and maintenance deadlines
-- Automatic account creation: when a new employee is added, a username is generated and emailed; employee sets password via link
+- Automatic account creation: when a new employee is added, a username is generated and emailed. Employee sets password via link
 - Live updates on number of employees and deployed groups (green = field, red = home)
 
 ## Tech Stack
@@ -38,8 +38,8 @@ DevOps:
 
 ## Project structure
 
-backend/
-frontend/
+- backend/
+- frontend/
 
 ## Screenshots
 
@@ -47,8 +47,14 @@ frontend/
 
 ![Login](screenshots/login.PNG)
 
+### Admin dashboard
+
+![Admin Dashboard](screenshots/admin_dashboard.PNG)
+
+### Groups section
+
+![Groups Section](screenshots/groups_section.PNG)
+
 ## Author
 
 Filip Buzuk - codename: GoldStar
-
-// Istek vremena treba provjeriti nakon 1 sat i sta onda nakon toga
