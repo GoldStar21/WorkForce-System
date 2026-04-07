@@ -1,14 +1,14 @@
 "use client";
 
 import { logout } from "@/lib/services/auth_service";
-import { FaUser } from "react-icons/fa";
-import { FaCarAlt } from "react-icons/fa";
-import { FaUsers } from "react-icons/fa6";
+import { TbUsersPlus } from "react-icons/tb";
+import { PiCar } from "react-icons/pi";
+import { TbUsersGroup } from "react-icons/tb";
 import { GrLogout } from "react-icons/gr";
 import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { IoHome } from "react-icons/io5";
+import { IoHomeOutline } from "react-icons/io5";
 
 const SideBar = () => {
   const router = useRouter();
@@ -38,7 +38,7 @@ const SideBar = () => {
           className="sidebar__item"
           onClick={() => router.push("/dashboard")}
         >
-          <IoHome className="sidebar__icon" />
+          <IoHomeOutline className="sidebar__icon" />
           {<span className="sidebar__text">HOME</span>}
         </div>
 
@@ -46,16 +46,16 @@ const SideBar = () => {
           className="sidebar__item"
           onClick={() => router.push("/employees")}
         >
-          <FaUser className="sidebar__icon" />
+          <TbUsersPlus className="sidebar__icon" />
           {<span className="sidebar__text">EMPLOYEES</span>}
         </div>
 
         <div className="sidebar__item" onClick={() => router.push("/cars")}>
-          <FaCarAlt className="sidebar__icon" />
+          <PiCar className="sidebar__icon" />
           {<span className="sidebar__text">CARS</span>}
         </div>
         <div className="sidebar__item" onClick={() => router.push("/groups")}>
-          <FaUsers className="sidebar__icon" />
+          <TbUsersGroup className="sidebar__icon" />
           {<span className="sidebar__text">GROUPS</span>}
         </div>
       </div>
