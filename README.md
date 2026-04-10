@@ -48,11 +48,11 @@ DevOps:
 
 ### Login page
 
-![Login](screenshots/login.png)
+![Login](screenshots/login_page.png)
 
 ### Admin dashboard
 
-![Admin Dashboard](screenshots/admin_dashboard.png)
+![Admin Dashboard](screenshots/admin_dash.png)
 
 ### Employees section
 
