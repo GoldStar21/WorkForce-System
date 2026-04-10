@@ -4,6 +4,8 @@ The WorkForce SYSTEM is a system designed to solve real-life problems I personal
 
 WorkForce SYSTEM is a management platform for tracking employees, work hours, company vehicles (registration and technical condition). It also has the ability to be upgraded to any new request that occur as necessary.
 
+Still under development.
+
 ## Features
 
 - Authentication (JWT)
@@ -22,6 +24,7 @@ Frontend:
 - Next.js
 - React
 - SCSS
+- TypeScript
 
 Backend:
 
@@ -45,15 +48,25 @@ DevOps:
 
 ### Login page
 
-![Login](screenshots/login.PNG)
+![Login](screenshots/login.png)
 
 ### Admin dashboard
 
-![Admin Dashboard](screenshots/admin_dashboard.PNG)
+![Admin Dashboard](screenshots/admin_dashboard.png)
+
+### Employees section
+
+![Employees Section](screenshots/employees_section.png)
+
+### Cars section
+
+![Cars Section](screenshots/cars_section.png)
 
 ### Groups section
 
-![Groups Section](screenshots/groups_section.PNG)
+![Groups Section](screenshots/groups_section.png)
+
+![Groups Section](screenshots/groups_section2.png)
 
 ## Author
 
