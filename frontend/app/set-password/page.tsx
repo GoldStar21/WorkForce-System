@@ -1,3 +1,5 @@
+"use client";
+
 import CreatePassword from "@/components/(login_&_password)/CreatePassword";
 
 const SetPassword = () => {
