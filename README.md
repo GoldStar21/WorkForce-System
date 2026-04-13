@@ -44,6 +44,32 @@ DevOps:
 - backend/
 - frontend/
 
+## Getting Started
+
+### Prerequisites
+
+- Docker Desktop installed
+
+### Setup
+
+1. Clone the repository
+
+2. Create your environment file
+
+3. Open `.env` and fill in your values
+
+4. Run the application
+
+5. Access the application
+   - Frontend: http://localhost:3000
+   - Backend: http://localhost:8080
+
+### Generate a JWT Secret
+
+```bash
+openssl rand -base64 32
+```
+
 ## Screenshots
 
 ### Login page

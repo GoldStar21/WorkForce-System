@@ -1,6 +1,5 @@
 # ---------- GLOBAL ----------
 .env
-.env.*
 *.log
 .DS_Store
 
