@@ -26,7 +26,7 @@ public class JwtService {
         return Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
     }
 
-    // --- 1. Kreiranje Tokena ---
+    //  1. Kreiranje Tokena
     public String createToken(UserDetails userDetails) {
         String role = userDetails.getAuthorities().stream()
                 .findFirst()
@@ -42,7 +42,7 @@ public class JwtService {
                 .compact();
     }
 
-    // --- 2. Validacija Tokena ---
+    // 2. Validacija Tokena
     public boolean validateToken(String token) {
         try {
             Jwts.parser()
@@ -51,13 +51,11 @@ public class JwtService {
                     .parseSignedClaims(token);
             return true;
         } catch (Exception e) {
-            // Logiranje grešaka (npr. istekli token, neispravan potpis)
-            // System.err.println("JWT Validation Error: " + e.getMessage());
             return false;
         }
     }
 
-    // --- 3. Parsiranje i dohvaćanje Claims-a ---
+    //  3. Parsiranje i dohvaćanje Claims-a
     public Claims parseToken(String token) {
         return Jwts.parser()
                 .verifyWith(getSigningKey())
@@ -66,7 +64,7 @@ public class JwtService {
                 .getPayload();
     }
 
-    // --- 4. Dohvaćanje korisničkog imena (koristi JwtFilter) ---
+    // 4. Dohvaćanje korisničkog imena (koristi JwtFilter)
     public String extractUsername(String token) {
         return parseToken(token).get("username", String.class);
     }

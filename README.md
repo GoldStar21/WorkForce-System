@@ -54,15 +54,13 @@ DevOps:
 
 1. Clone the repository
 
-2. Create your environment file
+2. Create your `.env` file (there is `.env example`)
 
 3. Open `.env` and fill in your values
 
-4. Run the application
+4. Run the application: docker compose up --build
 
-5. Access the application
-   - Frontend: http://localhost:3000
-   - Backend: http://localhost:8080
+5. Stop application: docker compose down
 
 ### Generate a JWT Secret
 

@@ -32,13 +32,7 @@ public class CarService {
     }
 
     public List<CarResponseDTO> getAllCars() {
-        /*
-        return carRepository.findAll()
-                .stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
 
-         */
         return carRepository.findBySoldFalse().stream().map(this::convertToDTO).collect(Collectors.toList());
 
     }

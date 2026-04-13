@@ -113,10 +113,10 @@ public class AssemblerService {
         //assembler.setLanguages(requestDto.getLanguages());
         assembler.setJob(requestDto.getJob());
 
-        // 1️⃣ Obriši stare jezike (orphanRemoval će ih maknuti iz baze)
+
         assembler.getLanguages().clear();
 
-        // 2️⃣ Dodaj nove (reuse helper)
+
         assembler.getLanguages().addAll(
                 createLanguages(requestDto, assembler)
         );

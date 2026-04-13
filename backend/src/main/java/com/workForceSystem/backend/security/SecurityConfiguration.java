@@ -44,25 +44,18 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
 
     private final JwtFilter jwtFilter;
-   // private final CustomUserDetailsService customUserDetailsService; // MORA BITI INJEKTIRAN!
-   // private final PasswordEncoder passwordEncoder;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(withDefaults())
-                .csrf(csrf -> csrf.disable()) // Onemogući CSRF za REST API
+                .csrf(csrf -> csrf.disable()) //
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        // Dozvoli pristup Login ruti bez autentifikacije
-
                         .requestMatchers("/auth/login","/auth/logout", "/employees/set-password").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // Sve ostale rute zahtijevaju autentifikaciju
                         .anyRequest().authenticated()
                 )
-                // Postavljanje sesije na STATELESS (Ključno za JWT)
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // Dodavanje našeg JWT filtera PRIJE standardnog filtera
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
@@ -83,11 +76,10 @@ public class SecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        // Zamijeni s tvojom frontend domenom (npr. "https://tvoja-domena.com" u produkciji)
         config.setAllowedOrigins(List.of("http://localhost:3000"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
-        config.setAllowCredentials(true); // <--- KLJUČNO ZA SLANJE/PRIMANJE COOKIE-a
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

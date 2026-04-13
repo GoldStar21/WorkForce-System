@@ -52,33 +52,27 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                    // 2. Dohvati UserDetails (s lozinkom, ulogama, itd.)
+                    // 2. Dohvati UserDetails
                     UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                     // 3. Kreiraj Authentication objekt
-                    // Koristimo konstruktor koji uzima authorities, jer je korisnik već autentičan (putem JWT-a)
                     UsernamePasswordAuthenticationToken auth =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
-                                    null, // Lozinka (credentials) se postavlja na null jer je token već provjeren
+                                    null,
                                     userDetails.getAuthorities()
                             );
-
-                    // Opcionalno: Dodaj detalje zahtjeva (npr. IP adresa)
-                    // auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                     // 4. Postavi Authentication u SecurityContext
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 }
 
             } catch (Exception e) {
-                // Greška prilikom parsiranja, učitavanja korisnika, itd.
-                // Logiraj grešku, a filter će ići dalje, ali bez postavljenog konteksta.
                 System.err.println("Error processing JWT: " + e.getMessage());
             }
         }
 
-        // Nastavi filter chain
+
         filterChain.doFilter(request, response);
 
 

@@ -79,9 +79,9 @@ public class GroupService {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new RuntimeException("Group not found"));
 
-        return group.getEmployees() // ovo je lista Assembler entiteta
+        return group.getEmployees()
                 .stream()
-                .map(EmployeesResponseDTO::fromEntity) // mapiranje u DTO
+                .map(EmployeesResponseDTO::fromEntity)
                 .toList();
     }
 
