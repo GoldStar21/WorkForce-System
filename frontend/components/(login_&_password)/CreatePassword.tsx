@@ -6,6 +6,8 @@ import { usePasswodHook } from "@/hooks/usePasswordHook";
 
 const CreatePassword = () => {
 
+  
+
     const { password, setPassword, confirmPassword, setConfirmPassword, handleRegister } =
     usePasswodHook();
 
