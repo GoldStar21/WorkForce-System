@@ -1,14 +1,9 @@
-"use client";
-
 import WorldMap from "@/components/WorldMap";
-import { useDashboardHook } from "@/hooks/useDashboardHook";
 import { AiOutlineTool } from "react-icons/ai";
 import { AiOutlineThunderbolt } from "react-icons/ai";
 import { LiaCarSideSolid } from "react-icons/lia";
 
-const Dashboard = () => {
-  const { assemblers, electricians, cars } = useDashboardHook();
-
+const EmpDashboard = () => {
   return (
     <div className="dashboardContent">
       <WorldMap />
@@ -19,7 +14,7 @@ const Dashboard = () => {
             <h2 className="dashboardContent__title">ASSEMBLERS</h2>
             <AiOutlineTool className="dashboardContent__icon" />
           </div>
-          <h3 className="dashboardContent__number">{assemblers}</h3>
+          <h3 className="dashboardContent__number"></h3>
           <p className="dashboardContent__title">Active units across globe</p>
         </div>
         <div className="dashboardContent__info">
@@ -27,7 +22,7 @@ const Dashboard = () => {
             <h2 className="dashboardContent__title">ELECTRICIANS</h2>
             <AiOutlineThunderbolt className="dashboardContent__icon" />
           </div>
-          <h3 className="dashboardContent__number">{electricians}</h3>
+          <h3 className="dashboardContent__number"></h3>
           <p className="dashboardContent__title">Active units across globe</p>
         </div>
         <div className="dashboardContent__info">
@@ -35,7 +30,7 @@ const Dashboard = () => {
             <h2 className="dashboardContent__title">CARS</h2>
             <LiaCarSideSolid className="dashboardContent__icon" />
           </div>
-          <h3 className="dashboardContent__number">{cars}</h3>
+          <h3 className="dashboardContent__number"></h3>
           <p className="dashboardContent__title">Active Cars across globe</p>
         </div>
       </div>
@@ -43,4 +38,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default EmpDashboard;

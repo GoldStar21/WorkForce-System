@@ -19,7 +19,7 @@ const LoginForm = () => {
     if (response.role === "ADMIN") {
       router.push("/dashboard");
     } else {
-      router.push("/employee-dashboard");
+      router.push("/emp_dashboard");
     }
   } catch (err) {
     console.error(err);
