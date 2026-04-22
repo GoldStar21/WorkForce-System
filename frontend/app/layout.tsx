@@ -5,7 +5,7 @@ import { Toaster } from "react-hot-toast";
 import 'leaflet/dist/leaflet.css';
 
 export const metadata = {
-  title: "My App",
+  title: "WorkForce SYSTEM",
 };
 
 
