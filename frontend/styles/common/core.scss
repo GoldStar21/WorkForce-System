@@ -9,5 +9,8 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
-  overflow: hidden;
+
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: #e6e6e6;
 }
