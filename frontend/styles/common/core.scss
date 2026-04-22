@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
 body {
@@ -8,4 +9,5 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
+  overflow: hidden;
 }
