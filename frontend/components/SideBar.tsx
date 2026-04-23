@@ -6,6 +6,7 @@ import { FaArrowsLeftRightToLine } from "react-icons/fa6";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ReactNode } from "react";
+import { SlLogin } from "react-icons/sl";
 
 interface SidebarItem {
   icon: ReactNode;
@@ -51,8 +52,8 @@ const SideBar = ({ items }: { items: SidebarItem[] }) => {
 
       <div className="sidebar__logout">
         <div className="sidebar__item" onClick={handleLogout}>
-          <GrLogout className="sidebar__logoutIcon" />
-          {<span className="sidebar__text">Logout</span>}
+          <SlLogin className="sidebar__logoutIcon" />
+          {<span className="sidebar__text">LOGOUT</span>}
         </div>
       </div>
     </aside>

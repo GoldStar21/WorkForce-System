@@ -19,7 +19,7 @@ export default function LeafletMap() {
 
   return (
     <MapContainer
-    attributionControl={false}
+      attributionControl={false}
       //Leefleet container - treba napraviti scss
       // Border radius inherit napraviti i tjt
       className="mapRadius"
@@ -27,8 +27,11 @@ export default function LeafletMap() {
       zoom={3}
       minZoom={2.5}
       maxZoom={20}
-      maxBounds={[[-90, -180], [90, 180]]}
-  maxBoundsViscosity={1.0}
+      maxBounds={[
+        [-90, -180],
+        [90, 180],
+      ]}
+      maxBoundsViscosity={1.0}
       style={{ height: "100%", width: "100%" }}
     >
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -37,7 +40,6 @@ export default function LeafletMap() {
         <Marker key={loc.id} position={[loc.latitude, loc.longitude]}>
           <Popup>
             <h4>PROJECT - {loc.name}</h4>
-            
           </Popup>
         </Marker>
       ))}

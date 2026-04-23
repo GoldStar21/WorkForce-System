@@ -16,7 +16,7 @@ const Dashboard = () => {
       <div className="dashboardContent__cards">
         <div className="dashboardContent__info">
           <div className="dashboardContent__top">
-            <h2 className="dashboardContent__title">ASSEMBLERS</h2>
+            <h2 className="dashboardContent__role">ASSEMBLERS</h2>
             <AiOutlineTool className="dashboardContent__icon" />
           </div>
           <h3 className="dashboardContent__number">{assemblers}</h3>
@@ -24,7 +24,7 @@ const Dashboard = () => {
         </div>
         <div className="dashboardContent__info">
           <div className="dashboardContent__top">
-            <h2 className="dashboardContent__title">ELECTRICIANS</h2>
+            <h2 className="dashboardContent__role">ELECTRICIANS</h2>
             <AiOutlineThunderbolt className="dashboardContent__icon" />
           </div>
           <h3 className="dashboardContent__number">{electricians}</h3>
@@ -32,7 +32,7 @@ const Dashboard = () => {
         </div>
         <div className="dashboardContent__info">
           <div className="dashboardContent__top">
-            <h2 className="dashboardContent__title">CARS</h2>
+            <h2 className="dashboardContent__role">CARS</h2>
             <LiaCarSideSolid className="dashboardContent__icon" />
           </div>
           <h3 className="dashboardContent__number">{cars}</h3>
