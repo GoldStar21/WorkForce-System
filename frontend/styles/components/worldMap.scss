@@ -8,9 +8,7 @@
       
 
   @include respondBetween(0, $breakpoint-mobile) {
-    height: 55dvh;
-    //border: 1px solid #131212;
+    height: 50dvh;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.80);
-    //border: 1px solid rgba(0, 0, 0, 0.06);
   }
 }
