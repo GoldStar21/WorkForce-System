@@ -6,14 +6,13 @@
   box-sizing: border-box;
 
   @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
-   
-  padding: 0 20px;
-    background-color: #FAFAFA;
-   }
+    padding: 0 20px;
+    background-color: #fafafa;
+  }
 
-   @include respondBetween(0, $breakpoint-mobile) {
-   padding: 0 10px;
-  
-    background-color: #FAFAFA;
-   }
+  @include respondBetween(0, $breakpoint-mobile) {
+    padding: 0 10px;
+    height: auto;
+    background-color: #fafafa;
+  }
 }

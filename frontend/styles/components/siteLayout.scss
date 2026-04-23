@@ -8,6 +8,7 @@
   @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
   }
   @include respondBetween(0, $breakpoint-mobile) {
+    height: auto;
     min-height: calc(100dvh - 100px);
   }
 }

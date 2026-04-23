@@ -16,7 +16,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
 
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#e6e6e6" />
       </head>
       
