@@ -20,7 +20,8 @@ that in first section.
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
 
   height: auto;
-  max-width: 420px;
+  max-width: 400px;
+  
 
   position: relative;
 
@@ -244,8 +245,14 @@ that in first section.
   }
 
   @include respondBetween(0, $breakpoint-mobile) {
+
+    height: auto;
+  max-height: 80dvh;
+  overflow-y: scroll;
+
     max-width: 220px;
-    overflow-y: auto;
+    //overflow-x: auto;
+    overflow-x: hidden;
     gap: 1.5rem;
     padding: 1.5rem;
 

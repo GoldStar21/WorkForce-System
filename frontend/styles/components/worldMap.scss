@@ -12,7 +12,7 @@
     right: 10px;
     z-index: 1000;
     background: white;
-    border: none;
+    border: 1px solid #2563eb;
     padding: 5px;
     cursor: pointer;
     border-radius: 4px;
@@ -38,7 +38,8 @@
     margin: 0.5rem;
 
     &__fullscreenBtn {
-      display: block;
+      //display: block;
+      display: flex;
     }
   }
 }

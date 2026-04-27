@@ -46,10 +46,10 @@ public class AuthController {
 
             ResponseCookie responseCookie = ResponseCookie.from("jwt", token)
                     .httpOnly(true)
-                    .secure(false)
+                    .secure(true)
                     .path("/")
                     .maxAge(60 * 60)
-                    .sameSite("Lax")
+                    .sameSite("None")
                     .build();
 
             response.addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
@@ -72,10 +72,10 @@ public class AuthController {
 
         ResponseCookie deleteCookie = ResponseCookie.from("jwt", "")
              .httpOnly(true)
-                    .secure(false)
+                    .secure(true)
                     .path("/")
                     .maxAge(0)  // <= briše cookie odmah
-                    .sameSite("Lax")
+                    .sameSite("None")
                     .build();
 
         response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());
