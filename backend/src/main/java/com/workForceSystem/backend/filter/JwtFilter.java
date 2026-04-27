@@ -25,6 +25,15 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,  FilterChain filterChain) throws ServletException, java.io.IOException {
 
+
+        // Skip OPTIONS preflight requests
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+
+
         // 1. Skip auth routes (login/register)
         if (request.getServletPath().startsWith("/auth") ||
                 request.getServletPath().equals("/employees/set-password")) {
