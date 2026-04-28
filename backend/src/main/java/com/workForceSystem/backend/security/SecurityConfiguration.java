@@ -51,8 +51,9 @@ public class SecurityConfiguration {
                 .cors(withDefaults())
                 .csrf(csrf -> csrf.disable()) //
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
-                        .requestMatchers("/auth/login","/auth/logout", "/employees/set-password").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers("/auth/login","/auth/logout", "/employees/set-password").permitAll()
+
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
