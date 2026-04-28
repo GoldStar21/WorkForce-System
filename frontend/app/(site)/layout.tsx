@@ -9,6 +9,7 @@ import { TbUsersPlus } from "react-icons/tb";
 import { PiCar } from "react-icons/pi";
 import { IoHomeOutline } from "react-icons/io5";
 import { TbUsersGroup } from "react-icons/tb";
+import { redirect } from "next/navigation";
 
 const adminItems = [
   { icon: <IoHomeOutline  className="sidebar__icon"/>, label: "HOME", href: "/dashboard" },
@@ -21,6 +22,10 @@ type SiteLayoutProps = { children: ReactNode };
 
 export default async function SiteLayout({ children }: SiteLayoutProps) {
   const token = (await cookies()).get("jwt")?.value;
+
+   if (!token) {
+    redirect("/");
+  }
 
   let username: string | null = null;
 
