@@ -24,10 +24,9 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
 
-
+    // Potrebno
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-
 
 
     @PostMapping("/login")
@@ -53,16 +52,6 @@ public class AuthController {
 
             response.addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
 
-            // cookie for log
-            ResponseCookie isLoggedInCookie = ResponseCookie.from("isLoggedIn", "true")
-                    .httpOnly(false)
-                    .secure(true)
-                    .path("/")
-                    .maxAge(60 * 60)
-                    .sameSite("None")
-                    .build();
-            response.addHeader(HttpHeaders.SET_COOKIE, isLoggedInCookie.toString());
-
             // Dohvati rolu iz authorities
             String role = userDetails.getAuthorities().stream()
                     .findFirst()
@@ -80,27 +69,15 @@ public class AuthController {
     public ResponseEntity<?> logout(HttpServletResponse response) {
 
         ResponseCookie deleteCookie = ResponseCookie.from("jwt", "")
-             .httpOnly(true)
-                    .secure(true)
-                    .path("/")
-                    .maxAge(0)  // <= briše cookie odmah
-                    .sameSite("None")
-                    .build();
-
-        response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());
-
-        // Cookie for log
-        ResponseCookie deleteIsLoggedIn = ResponseCookie.from("isLoggedIn", "")
-                .httpOnly(false)
+                .httpOnly(true)
                 .secure(true)
                 .path("/")
-                .maxAge(0)
+                .maxAge(0)  // ← mora biti 0
                 .sameSite("None")
                 .build();
-        response.addHeader(HttpHeaders.SET_COOKIE, deleteIsLoggedIn.toString());
+
+        response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());
         return ResponseEntity.ok("Logged out");
 
     }
-
-
 }

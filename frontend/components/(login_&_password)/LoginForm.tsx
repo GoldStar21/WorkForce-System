@@ -15,6 +15,8 @@ const LoginForm = () => {
   e.preventDefault();
   try {
     const response = await login(username, password);
+
+    document.cookie = "isLoggedIn=true; path=/; max-age=3600; SameSite=Lax; Secure";
     
     if (response.role === "ADMIN") {
       router.push("/dashboard");
