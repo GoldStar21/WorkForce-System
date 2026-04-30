@@ -9,7 +9,7 @@ import { TbUsersPlus } from "react-icons/tb";
 import { PiCar } from "react-icons/pi";
 import { IoHomeOutline } from "react-icons/io5";
 import { TbUsersGroup } from "react-icons/tb";
-import AuthGuard from "@/components/Auth";
+import { redirect } from "next/navigation";
 
 const adminItems = [
   { icon: <IoHomeOutline  className="sidebar__icon"/>, label: "HOME", href: "/dashboard" },
@@ -21,7 +21,17 @@ const adminItems = [
 type SiteLayoutProps = { children: ReactNode };
 
 export default async function SiteLayout({ children }: SiteLayoutProps) {
-  const token = (await cookies()).get("jwt")?.value;
+   const isLoggedIn = (await cookies()).get("isLoggedIn")?.value;
+  
+  if (!isLoggedIn) {
+    redirect("/");
+  }
+  
+  
+  
+  
+  const token = (await cookies()).get("isLoggedIn")?.value;
+
 
 
   let username: string | null = null;
@@ -40,8 +50,7 @@ export default async function SiteLayout({ children }: SiteLayoutProps) {
 
   return (
     <>
-      {/* Kasnije dodaješ kartice, tablice, grafove itd. */}
-      <AuthGuard >
+      
       <NavigationBar username={username} />
 
       <div className="siteLayout">
@@ -50,7 +59,7 @@ export default async function SiteLayout({ children }: SiteLayoutProps) {
       </div>
 
       <Footer />
-      </AuthGuard>
+      
     </>
   );
 }
