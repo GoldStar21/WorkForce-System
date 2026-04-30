@@ -3,7 +3,6 @@ package com.workForceSystem.backend.controller;
 
 import com.workForceSystem.backend.dto.login.LoginRequest;
 import com.workForceSystem.backend.dto.login.LoginResponse;
-import com.workForceSystem.backend.model.User;
 import com.workForceSystem.backend.service.JwtService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -54,6 +53,16 @@ public class AuthController {
 
             response.addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
 
+            // cookie for log
+            ResponseCookie isLoggedInCookie = ResponseCookie.from("isLoggedIn", "true")
+                    .httpOnly(false)
+                    .secure(true)
+                    .path("/")
+                    .maxAge(60 * 60)
+                    .sameSite("None")
+                    .build();
+            response.addHeader(HttpHeaders.SET_COOKIE, isLoggedInCookie.toString());
+
             // Dohvati rolu iz authorities
             String role = userDetails.getAuthorities().stream()
                     .findFirst()
@@ -79,6 +88,16 @@ public class AuthController {
                     .build();
 
         response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());
+
+        // Cookie for log
+        ResponseCookie deleteIsLoggedIn = ResponseCookie.from("isLoggedIn", "")
+                .httpOnly(false)
+                .secure(true)
+                .path("/")
+                .maxAge(0)
+                .sameSite("None")
+                .build();
+        response.addHeader(HttpHeaders.SET_COOKIE, deleteIsLoggedIn.toString());
         return ResponseEntity.ok("Logged out");
 
     }
