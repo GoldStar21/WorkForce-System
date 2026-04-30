@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
 
-    // Potrebno
+
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
