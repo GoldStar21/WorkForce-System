@@ -32,7 +32,7 @@ export const getGropList = async (groupId: number) => {
   return getList.data;
 };
 
-// Update group 
+
 // Update group
 export const updateGroup = async (groupId: number, group: GroupRequest): Promise<GroupResponse> => {
   const updateGroupResponse = await api_config.put<GroupResponse>(`/groups/${groupId}`, group);

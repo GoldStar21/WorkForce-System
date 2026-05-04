@@ -12,6 +12,7 @@ import { GroupType } from "@/app/(site)/groups/page";
 import { getAllGroups } from "@/lib/services/group_service";
 import toast from "react-hot-toast";
 import { useSharedHook } from "./sharedHook/useSharedHook";
+import { getGroupCar } from "@/lib/services/cars_service";
 
 export type GroupFormState = {
   employeesId: number[];
@@ -164,10 +165,17 @@ export const useGroupHook = (
   const [employeesOfTheGroup, setEmployeesOfTheGroup] = useState<Employee[]>(
     [],
   );
+  const [carOfThegroup, setCarOfThegroup] = useState<Car | null>(null);
 
-  const openEmployeeGroupList = (groupId: number) => {
+  const openEmployeeGroupList = (groupId: number, carId: number | null) => {
     setIsEmployeeListOpen(true);
     fetchDataForEmployees(groupId);
+    
+    if (carId) {
+    fetchDataForCar(carId); 
+  } else {
+    setCarOfThegroup(null); 
+  }
   };
 
   const closeEmployeeGroupList = () => {
@@ -180,6 +188,16 @@ export const useGroupHook = (
       setEmployeesOfTheGroup(data);
     } catch (error: any) {
       console.error("Error fetching employees:", error);
+    }
+  };
+
+  const fetchDataForCar = async(carId : number) => {
+console.log("Fetching car with ID:", carId);
+    try {
+      const data = await getGroupCar(carId);
+      setCarOfThegroup(data);
+    }catch (error: any) {
+      console.error("Error fetching car", error);
     }
   };
 
@@ -242,6 +260,9 @@ export const useGroupHook = (
     deleteConfirmation,
 
     cancelEdit,
+
+    carOfThegroup,
+    setCarOfThegroup,
 
     //refForDropdown,
   };

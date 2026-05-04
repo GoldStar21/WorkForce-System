@@ -30,7 +30,7 @@ export default async function SiteLayout({ children }: SiteLayoutProps) {
   
   
   
-  const token = (await cookies()).get("isLoggedIn")?.value;
+  const token = (await cookies()).get("jwt")?.value;
 
 
 

@@ -48,4 +48,10 @@ export const getAllCars = async (): Promise<CarResponse[]> => {
   return response.data;
 }
 
+// get car
+
+export const getGroupCar = async(carId: number) => {
+  const getCar = await api_config.get(`/cars/${carId}`);
+  return getCar.data;
+}
 

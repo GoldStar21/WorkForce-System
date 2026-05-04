@@ -6,7 +6,7 @@ import { FaCircle } from "react-icons/fa6";
 
 export type GroupProps = {
   groups: GroupType[];
-  openEmployeeGroupList: (groupId: number) => void;
+  openEmployeeGroupList: (groupId: number, carId: number | null) => void;
   setGroupName: (name: string) => void;
   editGroup: (group: GroupType) => void;
   openDeleteDialog: (id: number) => void;
@@ -48,7 +48,7 @@ const GroupTable = ({
                   label={<FaListUl />}
                   modifier="button--edit"
                   onClick={() => {
-                    openEmployeeGroupList(group.id);
+                    openEmployeeGroupList(group.id, group.carId);
                     setGroupName(group.name);
                   }}
                 />

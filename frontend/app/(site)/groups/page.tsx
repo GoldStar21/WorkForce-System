@@ -62,6 +62,9 @@ const Groups = () => {
     closeDeleteDialog,
     deleteConfirmation,
     cancelEdit,
+    carOfThegroup,
+    setCarOfThegroup,
+
   } = useGroupHook(groups, setGroups);
 
   return (
@@ -108,12 +111,19 @@ const Groups = () => {
             {employeesOfTheGroup.map((emp) => (
               <ul key={emp.id}>
                 <li>
-                  {" "}
-                  {emp.name} {emp.surname}{" "}
+                  {emp.name} {emp.surname}
                 </li>
               </ul>
             ))}
           </div>
+          <div className="groups__car">
+      {carOfThegroup ? (
+        <p>{carOfThegroup.make} {carOfThegroup.model}</p>
+      ) : (
+        <p>Nema zaduženog automobila</p>
+      )}
+    </div>
+          
 
           <div className="groups__button">
             <Button
