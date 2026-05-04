@@ -44,5 +44,11 @@ public class CarController {
         carService.deleteCar(id);
         return ResponseEntity.noContent().build();
     }
-    
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CarResponseDTO> getCarById(@PathVariable Long id) {
+        CarResponseDTO car = carService.getCarById(id);
+        return ResponseEntity.ok(car);
+    }
+
 }

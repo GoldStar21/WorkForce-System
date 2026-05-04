@@ -36,7 +36,7 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
             );
 
-            // UserDetails umjesto User — radi za oba (admin i radnik)
+            // UserDetails umjesto User
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
             // JWT token
@@ -44,10 +44,10 @@ public class AuthController {
 
             ResponseCookie responseCookie = ResponseCookie.from("jwt", token)
                     .httpOnly(true)
-                    .secure(false)
+                    .secure(true)
                     .path("/")
                     .maxAge(60 * 60)
-                    .sameSite("Lax")
+                    .sameSite("None")
                     .build();
 
             response.addHeader(HttpHeaders.SET_COOKIE, responseCookie.toString());
@@ -70,10 +70,10 @@ public class AuthController {
 
         ResponseCookie deleteCookie = ResponseCookie.from("jwt", "")
                 .httpOnly(true)
-                .secure(false) // true
+                .secure(true)
                 .path("/")
-                .maxAge(0)  // ← mora biti 0
-                .sameSite("Lax") //none
+                .maxAge(0)
+                .sameSite("None")
                 .build();
 
         response.addHeader(HttpHeaders.SET_COOKIE, deleteCookie.toString());

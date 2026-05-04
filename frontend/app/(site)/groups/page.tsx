@@ -115,14 +115,19 @@ const Groups = () => {
                 </li>
               </ul>
             ))}
-          </div>
-          <div className="groups__car">
+            <div className="groups__car">
       {carOfThegroup ? (
-        <p>{carOfThegroup.make} {carOfThegroup.model}</p>
+        
+        <ul>
+          <p>ASSIGNED CAR: </p>
+        <li>{carOfThegroup.make} {carOfThegroup.model}</li>
+        </ul>
       ) : (
-        <p>Nema zaduženog automobila</p>
+        <p>No assigned car</p>
       )}
     </div>
+          </div>
+          
           
 
           <div className="groups__button">

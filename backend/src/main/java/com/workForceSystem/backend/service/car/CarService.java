@@ -74,4 +74,9 @@ public class CarService {
         carRepository.save(car);
     }
 
+    public CarResponseDTO getCarById(Long id) {
+        Car car = carRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Car not found"));
+        return convertToDTO(car);
+    }
 }
