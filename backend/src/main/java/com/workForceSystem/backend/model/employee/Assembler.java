@@ -39,6 +39,9 @@ public class Assembler implements UserDetails {
 
     private boolean accountActivated;
 
+    @Column(name = "is_active", nullable = false)
+    private boolean isActive = true;
+
     @OneToMany(mappedBy = "assembler", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Language> languages;
 

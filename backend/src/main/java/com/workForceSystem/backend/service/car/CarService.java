@@ -71,6 +71,7 @@ public class CarService {
         Car car = carRepository.findById(id).orElseThrow(() -> new RuntimeException("Car not found"));
         car.setSold(true);
 
+        car.setSold(true);
         carRepository.save(car);
     }
 

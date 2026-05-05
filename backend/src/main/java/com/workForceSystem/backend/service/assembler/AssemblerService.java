@@ -54,7 +54,7 @@ public class AssemblerService {
 
     // Get Assemblers
     public List<AssemblerResponseDTO> getAllAssemblers() {
-        return assemblerRepository.findAll()
+        return assemblerRepository.findByIsActiveTrue()
                 .stream()
                 .map(this::convertEntityToDTO)
                 .collect(Collectors.toList());
@@ -96,11 +96,11 @@ public class AssemblerService {
     }
 
     public void deleteAssembler(Long id) {
+        Assembler assembler = assemblerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Assembler not found"));
 
-        if (!assemblerRepository.existsById(id)) {
-            throw new RuntimeException("Assembler not found");
-        }
-        assemblerRepository.deleteById(id);
+        assembler.setActive(false);
+        assemblerRepository.save(assembler);
     }
 
     public AssemblerResponseDTO updateAssembler(Long id, AssemblerRequestDTO requestDto) {
