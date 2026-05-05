@@ -1,6 +1,7 @@
 .siteLayoutContent {
   background-color: #eceff5;
   flex: 1;
+  overflow-y: auto;
   height: 100%;
   padding: 0 2rem;
   box-sizing: border-box;
@@ -8,11 +9,13 @@
   @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
     padding: 0 20px;
     background-color: #fafafa;
+    overflow-y: auto;
   }
 
   @include respondBetween(0, $breakpoint-mobile) {
     padding: 0 10px;
-    height: auto;
+     height: 100%;
     background-color: #fafafa;
+    overflow-y: auto;
   }
 }
