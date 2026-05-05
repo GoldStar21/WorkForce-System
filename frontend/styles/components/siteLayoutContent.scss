@@ -9,13 +9,13 @@
   @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
     padding: 0 20px;
     background-color: #fafafa;
-    overflow-y: unset; 
+    height: auto; 
   }
 
   @include respondBetween(0, $breakpoint-mobile) {
     padding: 0 10px;
      height: 100%;
     background-color: #fafafa;
-    overflow-y: unset; 
+    height: auto; 
   }
 }

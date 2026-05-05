@@ -1,6 +1,7 @@
 html {
   //scroll-behavior: smooth;
   height: 100%;
+  overscroll-behavior-y: none;
 }
 
 body {
@@ -15,4 +16,5 @@ body {
   background-color: #e6e6e6;
 
   overscroll-behavior: none;
+  overscroll-behavior-y: none;
 }

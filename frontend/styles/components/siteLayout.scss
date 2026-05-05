@@ -5,14 +5,16 @@
   width: 100%;
 
   @include respondBetween($breakpoint-mobile, $breakpoint-tablet) {
-    height: calc(100dvh - 100px);
-    height: calc(100dvh - 100px);
-    overflow-y: auto;
+    height: auto;
+    min-height: calc(100dvh - 100px);
+    overflow-x: hidden;
+    overscroll-behavior: none;
   }
 
   @include respondBetween(0, $breakpoint-mobile) {
-    height: calc(100dvh - 100px);
+    height: auto;
     min-height: calc(100dvh - 100px);
-    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: none;
   }
 }
