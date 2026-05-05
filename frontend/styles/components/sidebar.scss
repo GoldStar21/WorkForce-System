@@ -9,7 +9,7 @@
   box-sizing: border-box;
   box-shadow: 14px 0 10px rgba(180, 12, 12, 0.8);
 
-   overscroll-behavior: none;
+  overscroll-behavior: none;
   -webkit-overflow-scrolling: auto;
 
   transition:
@@ -117,6 +117,8 @@
 
     &--open {
       width: 170px;
+       overscroll-behavior: none;
+      overflow: hidden;
 
       .sidebar__text {
         display: block;
@@ -165,6 +167,8 @@
 
     &--open {
       width: 130px;
+      overscroll-behavior: none;
+      overflow: hidden;
 
       .sidebar__text {
         display: block;
